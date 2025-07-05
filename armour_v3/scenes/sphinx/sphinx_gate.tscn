@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cltivh32okpnx"]
+
+[ext_resource type="PackedScene" uid="uid://c6rv0isp56afq" path="res://scenes/sphinx/sphinxNew.glb" id="1_51gu7"]
+[ext_resource type="Material" uid="uid://dcxj3xi4wm0dd" path="res://scenes/sphinx/gun.tres" id="2_mqjej"]
+
+[node name="sphinxGate" type="Node3D"]
+
+[node name="sphinxNew" parent="." instance=ExtResource("1_51gu7")]
+transform = Transform3D(0.245387, 0, 0, 0, 0.245387, 0, 0, 0, 0.245387, 5.83611, 2.36835, 0)
+
+[node name="3521_Sphinx_1" parent="sphinxNew" index="0"]
+material_override = ExtResource("2_mqjej")
+
+[node name="sphinxNew2" parent="." instance=ExtResource("1_51gu7")]
+transform = Transform3D(-0.245387, 0, 2.14524e-08, 0, 0.245387, 0, -2.14524e-08, 0, -0.245387, -5.836, 2.368, 0)
+
+[node name="3521_Sphinx_1" parent="sphinxNew2" index="0"]
+material_override = ExtResource("2_mqjej")
+
+[editable path="sphinxNew"]
+[editable path="sphinxNew2"]

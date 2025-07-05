@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cs6vlxnak40th"]
+
+[ext_resource type="FontFile" uid="uid://d2yx4f5jrtkqd" path="res://fonts/ModernDOS9x16.ttf" id="1_w1jms"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_us8dn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0yv1i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_anxi0"]
+
+[node name="CommandPrompt" type="HBoxContainer"]
+
+[node name="TextCommandPrompt" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(82, 16)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("1_w1jms")
+bbcode_enabled = true
+text = "[color=GREEN]MXI@pc[/color]:[color=BLUE]~[/color]$"
+scroll_active = false
+
+[node name="LineEdit" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(150, 16)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_w1jms")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_us8dn")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_0yv1i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_anxi0")
+max_length = 78
+expand_to_text_length = true
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+flat = true

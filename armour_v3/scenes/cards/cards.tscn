@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://htisu5v24702"]
+
+[ext_resource type="Script" uid="uid://b82fgcnw1vqpi" path="res://scenes/cards/CardPyramid.cs" id="1_m273a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aesvp"]
+custom_solver_bias = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qbm1"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_swvls"]
+material = SubResource("StandardMaterial3D_7qbm1")
+size = Vector2(10, 10)
+
+[node name="cards" type="Node3D"]
+
+[node name="floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_aesvp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
+mesh = SubResource("PlaneMesh_swvls")
+
+[node name="cards" type="Node3D" parent="."]
+script = ExtResource("1_m273a")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
+visible = false
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.5, 0.5, 1.19209e-07, 0.707107, -0.707107, -0.707107, 0.5, 0.5, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 3)
+current = true
+fov = 30.0
+size = 5.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, -8.74228e-08)

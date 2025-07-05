@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckf3h88821he1"]
+
+[ext_resource type="Script" uid="uid://5ny7lpw27tit" path="res://scripts/Intro.cs" id="1_i2l1n"]
+[ext_resource type="Texture2D" uid="uid://ww5plnasb774" path="res://scenes/intro/nirvanaark9.jpg" id="2_wfs7u"]
+[ext_resource type="Texture2D" uid="uid://br1wu6ut7s135" path="res://scenes/intro/webnever.png" id="3_es01l"]
+[ext_resource type="Texture2D" uid="uid://ysvepr164hf2" path="res://scenes/intro/nowareos.png" id="4_0naf5"]
+[ext_resource type="Shader" uid="uid://7c33v4pcw6sk" path="res://shaders/VHS.gdshader" id="5_wfs7u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_es01l"]
+shader = ExtResource("5_wfs7u")
+shader_parameter/wiggle = 0.03
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 1.0
+shader_parameter/blur_samples = 15
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i2l1n")
+Images = [ExtResource("2_wfs7u"), ExtResource("3_es01l"), ExtResource("4_0naf5")]
+ImageScales = PackedFloat32Array(0.9, 0.8, 0.5)
+NextScenePath = "res://scenes/main.tscn"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 4096
+material = SubResource("ShaderMaterial_es01l")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

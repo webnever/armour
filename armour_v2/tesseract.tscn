@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bej4lkcd7h3m1"]
+
+[ext_resource type="Script" path="res://tesseract.gd" id="1_oy4km"]
+
+[node name="Tesseract" type="Node3D"]
+script = ExtResource("1_oy4km")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.499999, -0.707107, -0.353553, 0.612373, 24.4949, 20, 24.4949)
+projection = 1
+fov = 25.0
+size = 5.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.60732, 0.794457, 0, -0.794457, 0.60732, 0, 0, 0)

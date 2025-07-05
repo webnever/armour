@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0twu3k88wu8l"]
+
+[ext_resource type="Texture2D" uid="uid://c3k3erxw3pfwd" path="res://scenes/valHell/rose.png" id="1_t6jhx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8nhus"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_t6jhx")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_d4d62"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwj61"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_t6jhx")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_5ums0"]
+
+[node name="rose" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.496913, 0)
+material_override = SubResource("StandardMaterial3D_8nhus")
+mesh = SubResource("QuadMesh_d4d62")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.496913, 0)
+material_override = SubResource("StandardMaterial3D_pwj61")
+mesh = SubResource("QuadMesh_5ums0")

@@ -1,0 +1,12 @@
+[gd_resource type="Environment" format=3 uid="uid://dkbt38qtr2jox"]
+
+[resource]
+ambient_light_source = 2
+ambient_light_color = Color(0.160189, 0.145588, 0.16458, 1)
+tonemap_mode = 2
+ssr_enabled = true
+ssao_enabled = true
+ssao_detail = 1.0
+glow_enabled = true
+glow_bloom = 0.4
+volumetric_fog_density = 0.1

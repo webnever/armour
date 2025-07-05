@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfhlqikcexpnf"]
+
+[ext_resource type="PackedScene" uid="uid://pas6bq7w5gcv" path="res://models/mod_carpet1.gltf" id="1_fgyie"]
+[ext_resource type="Texture2D" uid="uid://nga22s340s3p" path="res://models/mod_carpet1_3.png" id="2_wf5vo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1ye4"]
+transparency = 1
+albedo_texture = ExtResource("2_wf5vo")
+
+[node name="blockbench_export" instance=ExtResource("1_fgyie")]
+
+[node name="cylinder" parent="Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00330615, 1.19209e-07, 0.00180578)
+material_override = SubResource("StandardMaterial3D_c1ye4")

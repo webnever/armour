@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://od6axt02fraw"]
+
+[ext_resource type="ArrayMesh" uid="uid://bmqdhpkpembis" path="res://scenes/intelligence/uploads_files_3221115_G2-Combat.obj" id="1_0pc7r"]
+[ext_resource type="Shader" uid="uid://cdoq3ioflalm3" path="res://scenes/intelligence/invisible.gdshader" id="2_drwmp"]
+[ext_resource type="Material" uid="uid://dcxj3xi4wm0dd" path="res://scenes/sphinx/gun.tres" id="3_x52te"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0fq5"]
+render_priority = 0
+shader = ExtResource("2_drwmp")
+
+[node name="guns" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.69051e-07, 7.09032, -10.9181, -1.4446, 10.8507, 7.04653, 12.938, 1.21154, 0.786783, 0.225, 1.883, 0.369264)
+mesh = ExtResource("1_0pc7r")
+surface_material_override/0 = SubResource("ShaderMaterial_v0fq5")
+surface_material_override/1 = ExtResource("3_x52te")
+surface_material_override/2 = ExtResource("3_x52te")
+surface_material_override/3 = ExtResource("3_x52te")
+surface_material_override/4 = ExtResource("3_x52te")
+surface_material_override/5 = ExtResource("3_x52te")
+surface_material_override/6 = ExtResource("3_x52te")
+surface_material_override/7 = ExtResource("3_x52te")
+surface_material_override/8 = ExtResource("3_x52te")
+surface_material_override/9 = ExtResource("3_x52te")
+surface_material_override/10 = ExtResource("3_x52te")
+surface_material_override/11 = ExtResource("3_x52te")
+surface_material_override/12 = ExtResource("3_x52te")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.69035e-07, -7.09011, 10.9111, 1.67463, 10.8271, 7.02688, 12.9098, -1.40447, -0.91151, -0.225, 1.883, 0.369264)
+mesh = ExtResource("1_0pc7r")
+surface_material_override/0 = SubResource("ShaderMaterial_v0fq5")
+surface_material_override/1 = ExtResource("3_x52te")
+surface_material_override/2 = ExtResource("3_x52te")
+surface_material_override/3 = ExtResource("3_x52te")
+surface_material_override/4 = ExtResource("3_x52te")
+surface_material_override/5 = ExtResource("3_x52te")
+surface_material_override/6 = ExtResource("3_x52te")
+surface_material_override/7 = ExtResource("3_x52te")
+surface_material_override/8 = ExtResource("3_x52te")
+surface_material_override/9 = ExtResource("3_x52te")
+surface_material_override/10 = ExtResource("3_x52te")
+surface_material_override/11 = ExtResource("3_x52te")
+surface_material_override/12 = ExtResource("3_x52te")

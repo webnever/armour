@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://7ups3ssjss1y"]
+
+[ext_resource type="FontFile" uid="uid://cbggblycitxkq" path="res://fonts/MSMINCHO.TTF" id="1_hi81y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_veku0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oma3e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wxune"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_prdys"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xw46x"]
+
+[node name="saveSlot" type="HBoxContainer"]
+use_parent_material = true
+mouse_filter = 2
+
+[node name="Control2" type="Control" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_veku0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_oma3e")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wxune")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_prdys")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xw46x")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(240, 135)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Control" type="Control" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="."]
+use_parent_material = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_hi81y")
+theme_override_font_sizes/font_size = 32
+text = "New Save"

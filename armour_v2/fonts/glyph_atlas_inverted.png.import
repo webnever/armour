@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://drn1b241eospg"
+path="res://.godot/imported/glyph_atlas_inverted.png-f16ccd96e53ab3dd220bdf13a52ff1a6.fontdata"
+
+[deps]
+
+source_file="res://fonts/glyph_atlas_inverted.png"
+dest_files=["res://.godot/imported/glyph_atlas_inverted.png-f16ccd96e53ab3dd220bdf13a52ff1a6.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("32-126")
+kerning_pairs=PackedStringArray()
+columns=10
+rows=10
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=64
+descent=0
+fallbacks=[]
+compress=false
+scaling_mode=2

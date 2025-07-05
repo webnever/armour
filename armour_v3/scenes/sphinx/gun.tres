@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dcxj3xi4wm0dd"]
+
+[ext_resource type="Shader" uid="uid://dy1fbqishfnk3" path="res://scenes/sphinx/red_chrome22.gdshader" id="1_7gbif"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7gbif")
+shader_parameter/baseColor = Color(1, 1, 1, 1)
+shader_parameter/gradientBasis = Vector3(3, 3, 3)
+shader_parameter/gradientBasisDistort = Vector3(0, 0, 0)
+shader_parameter/gradientBasisSpeed = 0.0
+shader_parameter/refractionSplit = 2.0
+shader_parameter/refractionSplitPower = 1.0
+shader_parameter/refractionAffect = 0.8

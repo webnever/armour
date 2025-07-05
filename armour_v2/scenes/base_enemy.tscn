@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4kc7yehm4at7"]
+
+[ext_resource type="Script" path="res://scripts_c#/BaseEnemy.cs" id="1_jisjm"]
+[ext_resource type="PackedScene" uid="uid://c02pc0mhkij7p" path="res://scenes/bullet.tscn" id="2_ky755"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1jugq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_urnrf"]
+
+[node name="baseEnemy" type="CharacterBody3D"]
+collision_layer = 8
+script = ExtResource("1_jisjm")
+bulletScene = ExtResource("2_ky755")
+weaponHolderPath = NodePath("WeaponHolder")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_1jugq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_urnrf")
+
+[node name="WeaponHolder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

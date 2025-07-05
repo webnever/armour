@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemProtoset" load_steps=2 format=3 uid="uid://tobru7l5ox8c"]
+
+[ext_resource type="Script" path="res://addons/gloot/core/item_protoset.gd" id="1_y84ka"]
+
+[resource]
+script = ExtResource("1_y84ka")
+json_data = "[
+    {
+        \"description\": \"Restores 100HP\",
+        \"restore\": \"100\",
+        \"id\": \"hpPotion\",
+        \"name\": \"HP Potion\",
+        \"quantity\": \"0\",
+        \"texture\": \"res://ui/potion-ball.png\"
+    },
+    {
+        \"description\": \"Restores 20MP\",
+        \"id\": \"mpPotion\",
+        \"name\": \"MP Potion\",
+        \"quantity\": \"0\",
+        \"restore\": \"20\",
+        \"texture\": \"res://ui/potion-ball.png\"
+    }
+]"

@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxqncu0v4mnn2"]
+
+[ext_resource type="PackedScene" uid="uid://cswad0gxmwbqg" path="res://player/mod_player.gltf" id="1_3ja8l"]
+
+[node name="blockbench_export2" instance=ExtResource("1_3ja8l")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="waist2" parent="Node/base" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.813004, 0.0136089)
+
+[node name="chest2" parent="Node/base/waist2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.991445, -0.130526, 0, 0.130526, 0.991445, -1.52208e-17, 0.140121, -0.0136089)
+
+[node name="head" parent="Node/base/waist2/chest2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 2.77556e-17, 1.125, -2.25514e-17)
+
+[node name="shoulder_left" parent="Node/base/waist2/chest2" index="2"]
+transform = Transform3D(0.0675101, -0.301552, -0.951056, 0.975844, 0.218468, -8.94069e-08, 0.207775, -0.928083, 0.309017, -0.5, 0.484375, -2.25514e-17)
+
+[node name="elbowleft" parent="Node/base/waist2/chest2/shoulder_left" index="1"]
+transform = Transform3D(0.642788, 0.766044, 0, -0.766045, 0.642788, 0, 0, 0, 1, -0.671875, -0.03125, 0)
+
+[node name="thumb_indexleft" parent="Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left/thumb_left" index="1"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -0.1875, 0, -0.046875)
+
+[node name="finger_3_left" parent="Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left" index="4"]
+transform = Transform3D(0.461749, -0.887011, 0, 0.887011, 0.461749, 0, 0, 0, 1, -0.34375, 0, -0.015625)
+
+[node name="index_3_left" parent="Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left/finger_3_left" index="1"]
+transform = Transform3D(0.130526, -0.991445, 0, 0.991445, 0.130526, 0, 0, 0, 1, -0.1875, 0, 0.03125)
+
+[node name="shoulder_right" parent="Node/base/waist2/chest2" index="3"]
+transform = Transform3D(0.213195, 0.0373362, 0.976296, -0.903741, 0.387207, 0.182543, -0.371213, -0.921237, 0.116293, 0.5, 0.484375, -2.25514e-17)
+
+[node name="elbowright" parent="Node/base/waist2/chest2/shoulder_right" index="1"]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 0.671875, -0.03125, 0)
+
+[node name="finger_3_right" parent="Node/base/waist2/chest2/shoulder_right/elbowright/hand_right" index="4"]
+transform = Transform3D(0.21644, 0.976296, 0, -0.976296, 0.21644, 0, 0, 0, 1, 0.34375, 0, -0.015625)
+
+[node name="index_3_right" parent="Node/base/waist2/chest2/shoulder_right/elbowright/hand_right/finger_3_right" index="1"]
+transform = Transform3D(0.0436193, 0.999048, 0, -0.999048, 0.0436193, 0, 0, 0, 1, 0.1875, 0, 0.03125)
+
+[node name="rope2" parent="Node/base/waist2" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52208e-17, 0.140121, -0.0136089)
+
+[node name="leg_left" parent="Node/base/waist2" index="3"]
+transform = Transform3D(-0.331551, 0.88631, 0.32331, 0.912162, 0.213642, 0.349741, 0.240906, 0.410868, -0.879291, -0.25, -0.375504, -0.0136089)
+
+[node name="knee_left" parent="Node/base/waist2/leg_left" index="1"]
+transform = Transform3D(0.92388, 0.353553, 0.146447, 0.293152, -0.899844, 0.323021, 0.245984, -0.255501, -0.934993, -0.078125, -0.734375, -0.024284)
+
+[node name="foot" parent="Node/base/waist2/leg_left/knee_left" index="1"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.015625, -1, 0.0285175)
+
+[node name="leg_right" parent="Node/base/waist2" index="4"]
+transform = Transform3D(-0.0560226, -0.766045, -0.640342, -0.998159, 0.028038, 0.0537856, -0.0232482, 0.642176, -0.766205, 0.25, -0.375504, -0.0136089)
+
+[node name="knee_right" parent="Node/base/waist2/leg_right" index="1"]
+transform = Transform3D(0.991445, -0.130526, -7.16125e-08, -0.106921, -0.812144, 0.573576, -0.0748668, -0.568669, -0.819152, 0.078125, -0.734375, -0.024284)
+
+[node name="foot2" parent="Node/base/waist2/leg_right/knee_right" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015625, -1, 0.0285175)

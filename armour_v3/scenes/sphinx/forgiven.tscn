@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddysx81bwa4av"]
+
+[ext_resource type="Shader" uid="uid://vmo0y5f3pnxb" path="res://scenes/forgiven/water.gdshader" id="1_fu8mb"]
+[ext_resource type="Texture2D" uid="uid://8363xgbpl028" path="res://scenes/forgiven/water.png" id="2_fccr7"]
+[ext_resource type="Script" uid="uid://ccx5p53qnifrx" path="res://scenes/forgiven/ForgivenFade.cs" id="3_o8wch"]
+[ext_resource type="FontFile" uid="uid://dr3cmujfwbapr" path="res://fonts/Vipnagorgialla-Rg.ttf" id="4_3oonx"]
+
+[sub_resource type="Environment" id="Environment_ow3cp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bpol7"]
+render_priority = 0
+shader = ExtResource("1_fu8mb")
+shader_parameter/water_texture = ExtResource("2_fccr7")
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(10, 10)
+shader_parameter/water_color = Color(1, 0, 0, 1)
+shader_parameter/wave_strength = 0.1
+shader_parameter/wave_frequency = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bpol7"]
+
+[node name="Forgiven" type="Node"]
+
+[node name="world" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12753, 1)
+environment = SubResource("Environment_ow3cp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="world"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_bpol7")
+mesh = SubResource("PlaneMesh_bpol7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 0.340347, 0.9403, 0, -0.9403, 0.340347, 0, 12, -10)
+light_energy = 3.0
+spot_range = 17.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_o8wch")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.509804, 0.027451, 0.0352941, 1)
+theme_override_fonts/normal_font = ExtResource("4_3oonx")
+theme_override_font_sizes/normal_font_size = 56
+text = "---- FORGIVEN ----"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://behe1kjbgrspy"
+path="res://.godot/imported/black_diamond2.obj-7cd2b8a224f74220b785ede915566c8b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/black_diamond2.obj-7cd2b8a224f74220b785ede915566c8b.mesh"]
+
+source_file="res://models/black_diamond2.obj"
+dest_files=["res://.godot/imported/black_diamond2.obj-7cd2b8a224f74220b785ede915566c8b.mesh", "res://.godot/imported/black_diamond2.obj-7cd2b8a224f74220b785ede915566c8b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

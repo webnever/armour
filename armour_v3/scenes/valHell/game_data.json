@@ -1,0 +1,140 @@
+{
+	"type": "unified_game_data",
+	"version": "0.1",
+	"locations": [
+		{
+			"id": "armour",
+			"name": "ÆETHER WEBNEVER: ARMOUR",
+			"description": "v2025.05.29\nBased on true events.\nType 'help' for commands.",
+			"exits": {
+				"begin": "mothership_briefing",
+				"valHell": "val_hell"
+			},
+			"region": "title",
+			"isDiscovered": true,
+			"imagePath": "armour.png"
+		},
+		{
+			"id": "val_hell",
+			"name": "VAL HELL",
+			"description": "DEMO",
+			"exits": {
+				"begin": "mothership_briefing",
+				"title": "armour"
+			},
+			"region": "title",
+			"isDiscovered": false,
+			"scenePath": "scenes/valHell/valHell.tscn"
+		},
+		{
+			"id": "mothership_briefing",
+			"name": "Mothership Briefing Chamber",
+			"description": "XMI, you have been assigned mission 'DNSCRYPT'. 2nd Earth underwent a depopulation event. An archive of 2nd Earth's internet is hidden on the planet. Extract the data to complete your mission.",
+			"exits": {
+				"raycast_teleport_to_3rd_Earth": "landing_zone"
+			},
+			"region": "Mothership",
+			"isDiscovered": false,
+			"scenePath": "scenes/intelligence/intelligence.tscn"
+		},
+		{
+			"id": "landing_zone",
+			"name": "Third Earth Desert Landing Zone",
+			"description": "The harsh landscape of 3rd Earth limitlessly sprawls over your vision. The sky is a hue of purple and red. The coarse sand seems to shift with black glitches. You've got nothing but your bare naked atlantean skin. Your naval upbringing longs for the sea.",
+			"exits": {
+				"deeper_desert": "deeper_desert"
+			},
+			"features": {
+				"sand": "You pick up some sand and roll it around your fingers. It feels like it has an electric buzz, and distorts with vantablack tracers.",
+				"landing": "A sandstone pavilion in a vast, irradiated desert. No sight of anything but sand and mountains on the horizon."
+			},
+			"region": "Third Earth Desert",
+			"isDiscovered": false
+		},
+		{
+			"id": "deeper_desert",
+			"name": "Deeper Desert",
+			"description": "You begin your walk deeper into the desert. The sun is eclipsed on the horizon, morning of a ring of fire scarcely illuminating your wandering path. You have complete faith in the mission.",
+			"exits": {
+				"forward": "desert_path_to_the_ghost_and_serpent",
+				"landing_zone": "landing_zone"
+			},
+			"features": {
+				"solarflare": "A solarflare marks your arrival."
+			},
+			"region": "Third Earth Desert",
+			"isDiscovered": false
+		},
+		{
+			"id": "desert_path_to_the_ghost_and_serpent",
+			"name": "Path to The Ghost & Serpent",
+			"description": "Through the heat waves in the distance, a crucifix stands on the horizon.",
+			"exits": {
+				"crucifix": "desert_crucifix",
+				"back": "deeper_desert"
+			},
+			"region": "Third Earth Desert",
+			"isDiscovered": false
+		},
+		{
+			"id": "desert_crucifix",
+			"name": "Desert Crucifix",
+			"description": "The crucifix fades into your sweltered vision, a holy sight. Pinned to the horizontal beam with stakes, a dead, black serpent, bleeding from the mouth. You ponder this for a while. Not sure what to make of it, you look around. A spectral figure wanders, not far from you.",
+			"exits": {
+				"spectral_figure": "desert_spectral_figure",
+				"back": "desert_path_to_the_ghost_and_serpent"
+			},
+			"features": {
+				"crucifix": "It's old. Really old. You wish you could carbon date it. The snake is dead as fuck."
+			},
+			"region": "Third Earth Desert",
+			"isDiscovered": false
+		},
+		{
+			"id": "desert_spectral_figure",
+			"name": "The Ghost",
+			"description": "You make out the first sign of life you can see on this god forbidden lifeless planet. His back is turned to you, as you make your first steps towards him, he turns his head and looks you directly in your eye. Nothing will describe the look of his face. You feel as if the gentlest, most powerful force has moved your soul. He smiles, and vanishes. Beyond his disappearance, you see the remnants of a temple.",
+			"exits": {
+				"temple": "desert_hijack_temple_entrance"
+			},
+			"features": {
+				"spectral_figure": "He's gone man.",
+				"temple": "Way off in the distance. Embedded in some rocky mountains."
+			},
+			"region": "Third Earth Desert",
+			"isDiscovered": false
+		},
+		{
+			"id": "desert_hijack_temple_entrance",
+			"name": "Entrance to the HIJACK store",
+			"description": "A temple embedded in some rocky mountains. Pillars at the entrance. A chrome red bitten apple logo marks over the double door.",
+			"exits": {
+				"entrance": "hijack_store"
+			},
+			"features": {
+				"door": "Seems extremely high class. Artisan. Hand crafted decals. Fine attention to detail. There's doesn't seem to be a way to open the door."
+			},
+			"region": "HIJACK Store",
+			"isDiscovered": false
+		},
+		{
+			"id": "hijack_store",
+			"name": "HIJACK store",
+			"description": "You approach the doorway. You can't see a way to open the door. Out of thin air, clean, minimalist digital HUD prompts you to use FACE ID for verification.",
+			"features": {
+				"hud": "You've been alive for 1000s of years and know how to use futurist technology. This isn't your first rodeo, in fact you've done plenty of soul missions utilizing AI supercomputing. You ponder channeling and shapeshifting into the CEO of whatever this chrome red Apple Store is, but you couldn't be bothered using all that energy, especially without a source of water. This desert feels like hell without water. Your native spirit belongs to the ocean."
+			},
+			"puzzleIds": [
+				"hijack_store_door"
+			],
+			"region": "HIJACK Store",
+			"isDiscovered": false,
+			"scenePath": "scenes/hijack/hijack.tscn"
+		}
+	],
+	"items": [],
+	"characters": [],
+	"enemies": [],
+	"puzzles": [],
+	"quests": []
+}

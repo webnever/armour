@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwipiagv8bgrj"]
+
+[ext_resource type="PackedScene" uid="uid://qgulmmjo72co" path="res://models/mod_diamond.gltf" id="1_yritr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4qi6"]
+albedo_color = Color(0.054902, 0.054902, 0.054902, 1)
+metallic = 0.72
+metallic_specular = 1.0
+roughness = 0.35
+
+[node name="blockbench_export" instance=ExtResource("1_yritr")]
+
+[node name="cone" parent="Node" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_c4qi6")

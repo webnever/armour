@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c02pc0mhkij7p"]
+
+[ext_resource type="Script" path="res://scripts_c#/Bullet.cs" id="1_7qlda"]
+
+[node name="Bullet" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 9
+gravity_scale = 0.0
+custom_integrator = true
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_7qlda")
+bulletColor = Color(0.447918, 0.967755, 1.54018e-06, 1)

@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Data Converter & Map Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e1e2e, #2d2d3d);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 20px;
+            min-height: 80vh;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .panel {
+            background: rgba(40, 40, 60, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #444;
+            backdrop-filter: blur(10px);
+        }
+        
+        .main-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            grid-column: 1 / -1;
+        }
+        
+        h2 {
+            color: #ff6b6b;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        h3 {
+            color: #4ecdc4;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        textarea {
+            width: 100%;
+            background: #1a1a2e;
+            color: #ffffff;
+            border: 1px solid #555;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        
+        .md-input { height: 200px; }
+        .json-output { height: 150px; }
+        .json-preview { height: 100px; }
+        
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 5px 3px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 12px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .map-container {
+            flex-grow: 1;
+            min-height: 500px;
+            background: #0f0f1f;
+            border: 2px solid #333;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+        }
+        
+        .map-container:active {
+            cursor: grabbing;
+        }
+        
+        .map-viewport {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform-origin: 0 0;
+            transition: transform 0.1s ease-out;
+        }
+        
+        .location-node {
+            position: absolute;
+            min-width: 100px;
+            max-width: 140px;
+            height: auto;
+            min-height: 60px;
+            background: linear-gradient(45deg, #4a4a6a, #6a6a8a);
+            border: 2px solid #8a8aaa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 9px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            padding: 8px;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            line-height: 1.2;
+        }
+        
+        .location-node:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #6a6a8a, #8a8aaa);
+            box-shadow: 0 0 20px rgba(138, 138, 170, 0.6);
+            z-index: 100;
+        }
+        
+        .location-node.discovered {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            border-color: #2ecc71;
+        }
+        
+        .location-node.title {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            border-color: #9b59b6;
+        }
+        
+        .connection-line {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            height: 2px;
+            transform-origin: left center;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .region-cluster {
+            position: absolute;
+            border: 2px dashed rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(0, 212, 255, 0.05);
+            pointer-events: none;
+        }
+        
+        .region-label {
+            position: absolute;
+            font-size: 12px;
+            font-weight: bold;
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-card {
+            background: rgba(30, 30, 50, 0.8);
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 3px;
+        }
+        
+        .controls {
+            background: rgba(20, 20, 40, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .zoom-controls {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .zoom-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .search-box {
+            flex-grow: 1;
+            padding: 6px 10px;
+            background: #1a1a2e;
+            color: white;
+            border: 1px solid #555;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .filter-button {
+            padding: 4px 8px;
+            font-size: 10px;
+            border-radius: 12px;
+        }
+        
+        .filter-button.active {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+        
+        .log {
+            background: #1a1a2e;
+            border: 1px solid #555;
+            border-radius: 5px;
+            padding: 10px;
+            height: 120px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+        }
+        
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px;
+            line-height: 1.3;
+        }
+        
+        .log-success { color: #2ecc71; }
+        .log-error { color: #e74c3c; }
+        .log-info { color: #3498db; }
+        .log-warning { color: #f39c12; }
+        
+        .performance-info {
+            font-size: 10px;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        .location-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 200px;
+            border: 1px solid #666;
+        }
+        
+        .minimap {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 150px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #666;
+            border-radius: 4px;
+        }
+        
+        .minimap-viewport {
+            position: absolute;
+            border: 2px solid #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+            }
+            
+            .sidebar {
+                flex-direction: row;
+                overflow-x: auto;
+            }
+            
+            .panel {
+                min-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 AETHER WEBNEVER: ARMOUR - Advanced Game Data Pipeline</h1>
+    
+    <div class="container">
+        <div class="sidebar">
+            <div class="panel">
+                <h2>📝 Markdown Input</h2>
+                <textarea id="markdownInput" class="md-input" placeholder="Paste your edited markdown content here..."></textarea>
+                <div>
+                    <button onclick="convertMarkdownToJSON()">Convert MD → JSON</button>
+                    <button onclick="loadSampleMarkdown()">Load Sample</button>
+                </div>
+                <div class="performance-info" id="conversionStats"></div>
+            </div>
+            
+            <div class="panel">
+                <h2>📄 JSON Management</h2>
+                <h3>Preview (First 50 Lines)</h3>
+                <textarea id="jsonPreview" class="json-preview" readonly></textarea>
+                <div>
+                    <button onclick="downloadJSON()">📥 Download JSON</button>
+                    <button onclick="loadJSONFile()">📂 Load JSON File</button>
+                    <button onclick="validateJSON()">✅ Validate</button>
+                </div>
+                <input type="file" id="jsonFileInput" accept=".json" style="display: none" onchange="handleJSONFile(event)">
+                <div class="performance-info" id="jsonStats"></div>
+            </div>
+            
+            <div class="panel">
+                <h2>📊 Game Statistics</h2>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="locationCount">0</div>
+                        <div class="stat-label">Locations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="regionCount">0</div>
+                        <div class="stat-label">Regions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="connectionCount">0</div>
+                        <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="discoveredCount">0</div>
+                        <div class="stat-label">Discovered</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="itemCount">0</div>
+                        <div class="stat-label">Items</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="characterCount">0</div>
+                        <div class="stat-label">Characters</div>
+                    </div>
+                </div>
+                
+                <h3>📋 Activity Log</h3>
+                <div class="log" id="conversionLog"></div>
+            </div>
+        </div>
+        
+        <div class="main-panel">
+            <div class="panel">
+                <h2>🗺️ Interactive Game World Map</h2>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <strong>🔍 View Controls:</strong>
+                        <div class="zoom-controls">
+                            <button class="zoom-button" onclick="zoomIn()">+</button>
+                            <button class="zoom-button" onclick="zoomOut()">−</button>
+                            <button class="zoom-button" onclick="resetView()" title="Reset View">⌂</button>
+                        </div>
+                        <input type="search" class="search-box" id="searchBox" placeholder="🔍 Search locations..." onkeyup="searchLocations(event)">
+                    </div>
+                    
+                    <div class="control-group">
+                        <strong>🎯 Filters:</strong>
+                        <div class="filter-buttons">
+                            <button class="filter-button active" onclick="toggleFilter('all')">All</button>
+                            <button class="filter-button" onclick="toggleFilter('discovered')">Discovered</button>
+                            <button class="filter-button" onclick="toggleFilter('undiscovered')">Undiscovered</button>
+                            <button class="filter-button" onclick="toggleFilter('title')">Title</button>
+                        </div>
+                        <button onclick="generateMap()">🔄 Regenerate</button>
+                        <button onclick="autoLayout()">📐 Auto Layout</button>
+                    </div>
+                </div>
+                
+                <div id="mapContainer" class="map-container">
+                    <div id="mapViewport" class="map-viewport"></div>
+                    <div class="minimap" id="minimap">
+                        <div class="minimap-viewport" id="minimapViewport"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let gameData = null;
+        let currentZoom = 1;
+        let currentPanX = 0;
+        let currentPanY = 0;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let activeFilters = new Set(['all']);
+        let locationPositions = {};
+        let renderCache = new Map();
+        
+        // Performance monitoring
+        let lastRenderTime = 0;
+        let renderCount = 0;
+        
+        function log(message, type = 'info') {
+            const logContainer = document.getElementById('conversionLog');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            const timestamp = new Date().toLocaleTimeString();
+            entry.innerHTML = `<span style="color: #666">[${timestamp}]</span> ${message}`;
+            logContainer.appendChild(entry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+            
+            // Keep only last 50 entries for performance
+            while (logContainer.children.length > 50) {
+                logContainer.removeChild(logContainer.firstChild);
+            }
+        }
+        
+        function loadSampleMarkdown() {
+            const sampleMD = `# Sample Game Data
+
+## Locations
+
+### Title Screen
+#### AETHER WEBNEVER: ARMOUR
+- **ID:** armour
+- **Region:** title
+- **Description:** v2025.05.24 Type 'help' for commands.
+- **Exits:** begin → mothership_briefing
+- **Discovered:** Yes
+
+#### Mothership Briefing Chamber
+- **ID:** mothership_briefing
+- **Region:** Mothership
+- **Description:** A sterile chamber with holographic briefings.
+- **Exits:** teleport → forest_clearing
+- **Discovered:** Yes
+
+#### Forest Clearing
+- **ID:** forest_clearing
+- **Region:** Third Earth
+- **Description:** Reality pixelates as molecular reconstruction completes.
+- **Exits:** follow → sanctuary, north → deeper_forest
+- **Discovered:** No`;
+            
+            document.getElementById('markdownInput').value = sampleMD;
+            log('Sample markdown loaded', 'success');
+        }
+        
+        function convertMarkdownToJSON() {
+            const markdown = document.getElementById('markdownInput').value;
+            const startTime = performance.now();
+            
+            try {
+                log('Starting markdown to JSON conversion...', 'info');
+                
+                const locations = [];
+                const items = [];
+                const characters = [];
+                const lines = markdown.split('\n');
+                let currentLocation = null;
+                let currentSection = null;
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    
+                    // Section headers
+                    if (line.startsWith('## ')) {
+                        currentSection = line.substring(3).trim().toLowerCase();
+                        continue;
+                    }
+                    
+                    // Location header
+                    if (line.startsWith('#### ') && currentSection === 'locations') {
+                        if (currentLocation) {
+                            locations.push(currentLocation);
+                        }
+                        currentLocation = {
+                            name: line.substring(4).trim(),
+                            exits: {},
+                            features: {},
+                            itemIds: [],
+                            characterIds: []
+                        };
+                    }
+                    
+                    // Properties
+                    if (currentLocation && line.startsWith('- **')) {
+                        const match = line.match(/- \*\*(\w+):\*\* (.+)/);
+                        if (match) {
+                            const [, key, value] = match;
+                            
+                            switch (key) {
+                                case 'ID':
+                                    currentLocation.id = value;
+                                    break;
+                                case 'Region':
+                                    currentLocation.region = value;
+                                    break;
+                                case 'Description':
+                                    currentLocation.description = value;
+                                    break;
+                                case 'Discovered':
+                                    currentLocation.isDiscovered = value.toLowerCase() === 'yes';
+                                    break;
+                                case 'Exits':
+                                    value.split(',').forEach(exit => {
+                                        const [direction, target] = exit.split('→').map(s => s.trim());
+                                        if (direction && target) {
+                                            currentLocation.exits[direction] = target;
+                                        }
+                                    });
+                                    break;
+                                case 'Items':
+                                    currentLocation.itemIds = value.split(',').map(s => s.trim());
+                                    break;
+                                case 'Characters':
+                                    currentLocation.characterIds = value.split(',').map(s => s.trim());
+                                    break;
+                            }
+                        }
+                    }
+                }
+                
+                if (currentLocation) {
+                    locations.push(currentLocation);
+                }
+                
+                // Create comprehensive JSON structure
+                gameData = {
+                    type: "unified_game_data",
+                    version: "0.1",
+                    metadata: {
+                        lastModified: new Date().toISOString(),
+                        totalSize: JSON.stringify(locations).length,
+                        conversionTime: performance.now() - startTime
+                    },
+                    locations: locations,
+                    items: items,
+                    characters: characters
+                };
+                
+                updateJSONPreview();
+                updateStats();
+                
+                const endTime = performance.now();
+                const stats = `Converted ${locations.length} locations in ${Math.round(endTime - startTime)}ms`;
+                document.getElementById('conversionStats').textContent = stats;
+                log(`Conversion successful! ${stats}`, 'success');
+                
+            } catch (error) {
+                log(`Conversion failed: ${error.message}`, 'error');
+                console.error('Conversion error:', error);
+            }
+        }
+        
+        function updateJSONPreview() {
+            if (!gameData) return;
+            
+            const jsonString = JSON.stringify(gameData, null, 2);
+            const lines = jsonString.split('\n').slice(0, 50);
+            const preview = lines.join('\n');
+            const truncated = lines.length < jsonString.split('\n').length;
+            
+            document.getElementById('jsonPreview').value = preview + (truncated ? '\n... (truncated)' : '');
+            
+            const sizeKB = Math.round(jsonString.length / 1024);
+            document.getElementById('jsonStats').textContent = `Size: ${sizeKB}KB | Lines: ${jsonString.split('\n').length}`;
+        }
+        
+        function updateStats() {
+            if (!gameData) return;
+            
+            const locations = gameData.locations || [];
+            const items = gameData.items || [];
+            const characters = gameData.characters || [];
+            
+            document.getElementById('locationCount').textContent = locations.length;
+            document.getElementById('regionCount').textContent = new Set(locations.map(l => l.region)).size;
+            document.getElementById('discoveredCount').textContent = locations.filter(l => l.isDiscovered).length;
+            document.getElementById('itemCount').textContent = items.length;
+            document.getElementById('characterCount').textContent = characters.length;
+            
+            let connectionCount = 0;
+            locations.forEach(loc => {
+                if (loc.exits) connectionCount += Object.keys(loc.exits).length;
+            });
+            document.getElementById('connectionCount').textContent = connectionCount;
+        }
+        
+        function loadJSONFile() {
+            document.getElementById('jsonFileInput').click();
+        }
+        
+        function handleJSONFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            log(`Loading JSON file: ${file.name} (${Math.round(file.size / 1024)}KB)`, 'info');
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    gameData = JSON.parse(e.target.result);
+                    updateJSONPreview();
+                    updateStats();
+                    log(`JSON file loaded successfully`, 'success');
+                } catch (error) {
+                    log(`Failed to parse JSON: ${error.message}`, 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function validateJSON() {
+            if (!gameData) {
+                log('No JSON data to validate', 'warning');
+                return;
+            }
+            
+            const issues = [];
+            const locations = gameData.locations || [];
+            
+            // Check for missing IDs
+            locations.forEach((loc, i) => {
+                if (!loc.id) issues.push(`Location ${i} missing ID`);
+                if (!loc.region) issues.push(`Location ${loc.id || i} missing region`);
+            });
+            
+            // Check for broken connections
+            const locationIds = new Set(locations.map(l => l.id));
+            locations.forEach(loc => {
+                if (loc.exits) {
+                    Object.values(loc.exits).forEach(target => {
+                        if (!locationIds.has(target)) {
+                            issues.push(`${loc.id} has broken exit to ${target}`);
+                        }
+                    });
+                }
+            });
+            
+            if (issues.length === 0) {
+                log('✅ JSON validation passed', 'success');
+            } else {
+                log(`❌ Found ${issues.length} validation issues`, 'warning');
+                issues.slice(0, 5).forEach(issue => log(`  • ${issue}`, 'warning'));
+                if (issues.length > 5) log(`  • ... and ${issues.length - 5} more`, 'warning');
+            }
+        }
+        
+        function downloadJSON() {
+            if (!gameData) {
+                log('No JSON data to download', 'error');
+                return;
+            }
+            
+            const jsonString = JSON.stringify(gameData, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `game_data_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            log(`JSON downloaded (${Math.round(jsonString.length / 1024)}KB)`, 'success');
+        }
+        
+        // Map generation and interaction
+        function generateMap() {
+            if (!gameData || !gameData.locations) {
+                log('No game data available. Convert markdown first.', 'error');
+                return;
+            }
+            
+            const startTime = performance.now();
+            log('Generating map visualization...', 'info');
+            
+            const locations = gameData.locations;
+            const regions = [...new Set(locations.map(l => l.region))];
+            
+            calculateLocationPositions(locations, regions);
+            renderMap();
+            updateMinimap();
+            
+            const renderTime = Math.round(performance.now() - startTime);
+            log(`Map generated in ${renderTime}ms with ${locations.length} locations`, 'success');
+        }
+        
+        function calculateLocationPositions(locations, regions) {
+            locationPositions = {};
+            const mapWidth = 2000;
+            const mapHeight = 1500;
+            
+            // Smart region positioning
+            const regionPositions = {};
+            const cols = Math.ceil(Math.sqrt(regions.length));
+            
+            regions.forEach((region, i) => {
+                const row = Math.floor(i / cols);
+                const col = i % cols;
+                regionPositions[region] = {
+                    x: (col + 0.5) * (mapWidth / cols),
+                    y: (row + 0.5) * (mapHeight / Math.ceil(regions.length / cols))
+                };
+            });
+            
+            // Position locations within regions using force-directed layout
+            regions.forEach(region => {
+                const regionLocs = locations.filter(l => l.region === region);
+                const basePos = regionPositions[region];
+                const regionSize = Math.min(300, Math.max(150, regionLocs.length * 30));
+                
+                regionLocs.forEach((loc, i) => {
+                    if (regionLocs.length === 1) {
+                        locationPositions[loc.id] = { ...basePos };
+                    } else {
+                        const angle = (i / regionLocs.length) * 2 * Math.PI;
+                        const radius = regionSize / 2;
+                        locationPositions[loc.id] = {
+                            x: basePos.x + Math.cos(angle) * radius,
+                            y: basePos.y + Math.sin(angle) * radius
+                        };
+                    }
+                });
+            });
+        }
+        
+        function renderMap() {
+            const viewport = document.getElementById('mapViewport');
+            viewport.innerHTML = '';
+            renderCache.clear();
+            
+            const locations = gameData.locations;
+            
+            // Render connections first (behind nodes)
+            locations.forEach(location => {
+                if (location.exits) {
+                    Object.values(location.exits).forEach(targetId => {
+                        renderConnection(location.id, targetId, viewport);
+                    });
+                }
+            });
+            
+            // Render location nodes
+            locations.forEach(location => {
+                renderLocationNode(location, viewport);
+            });
+            
+            renderCount++;
+        }
+        
+        function renderConnection(fromId, toId, container) {
+            const startPos = locationPositions[fromId];
+            const endPos = locationPositions[toId];
+            
+            if (!startPos || !endPos) return;
+            
+            const line = document.createElement('div');
+            line.className = 'connection-line';
+            
+            const dx = endPos.x - startPos.x;
+            const dy = endPos.y - startPos.y;
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+            
+            line.style.left = startPos.x + 'px';
+            line.style.top = startPos.y + 'px';
+            line.style.width = length + 'px';
+            line.style.transform = `rotate(${angle}deg)`;
+            
+            container.appendChild(line);
+        }
+        
+        function renderLocationNode(location, container) {
+            const node = document.createElement('div');
+            node.className = 'location-node';
+            node.textContent = location.name || location.id;
+            node.dataset.locationId = location.id;
+            
+            // Apply filters
+            let visible = true;
+            if (activeFilters.has('discovered') && !location.isDiscovered) visible = false;
+            if (activeFilters.has('undiscovered') && location.isDiscovered) visible = false;
+            if (activeFilters.has('title') && location.region !== 'title') visible = false;
+            
+            if (!visible && !activeFilters.has('all')) {
+                node.style.display = 'none';
+            }
+            
+            if (location.isDiscovered) {
+                node.classList.add('discovered');
+            }
+            if (location.region === 'title') {
+                node.classList.add('title');
+            }
+            
+            const pos = locationPositions[location.id];
+            if (pos) {
+                node.style.left = (pos.x - 60) + 'px';
+                node.style.top = (pos.y - 30) + 'px';
+            }
+            
+            // Add event listeners
+            node.addEventListener('click', () => selectLocation(location));
+            node.addEventListener('mouseenter', (e) => showTooltip(e, location));
+            node.addEventListener('mouseleave', hideTooltip);
+            
+            container.appendChild(node);
+        }
+        
+        function selectLocation(location) {
+            log(`Selected: ${location.name || location.id} (${location.region})`, 'info');
+            
+            // Highlight selected node
+            document.querySelectorAll('.location-node').forEach(n => n.classList.remove('selected'));
+            document.querySelector(`[data-location-id="${location.id}"]`).classList.add('selected');
+            
+            // Center view on selected location
+            const pos = locationPositions[location.id];
+            if (pos) {
+                const container = document.getElementById('mapContainer');
+                const containerRect = container.getBoundingClientRect();
+                
+                currentPanX = containerRect.width / 2 - pos.x * currentZoom;
+                currentPanY = containerRect.height / 2 - pos.y * currentZoom;
+                
+                updateMapTransform();
+            }
+        }
+        
+        function showTooltip(event, location) {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'location-tooltip';
+            tooltip.id = 'locationTooltip';
+            
+            const exitCount = location.exits ? Object.keys(location.exits).length : 0;
+            const itemCount = location.itemIds ? location.itemIds.length : 0;
+            const charCount = location.characterIds ? location.characterIds.length : 0;
+            
+            tooltip.innerHTML = `
+                <strong>${location.name || location.id}</strong><br>
+                <em>${location.region}</em><br>
+                ${location.description ? location.description.substring(0, 100) + '...' : ''}<br>
+                <small>
+                    Exits: ${exitCount} | Items: ${itemCount} | Characters: ${charCount}
+                    ${location.isDiscovered ? ' | ✅ Discovered' : ' | ❌ Undiscovered'}
+                </small>
+            `;
+            
+            tooltip.style.left = event.pageX + 10 + 'px';
+            tooltip.style.top = event.pageY + 10 + 'px';
+            
+            document.body.appendChild(tooltip);
+        }
+        
+        function hideTooltip() {
+            const tooltip = document.getElementById('locationTooltip');
+            if (tooltip) {
+                tooltip.remove();
+            }
+        }
+        
+        function searchLocations(event) {
+            const query = event.target.value.toLowerCase();
+            const nodes = document.querySelectorAll('.location-node');
+            
+            nodes.forEach(node => {
+                const locationId = node.dataset.locationId;
+                const location = gameData.locations.find(l => l.id === locationId);
+                
+                if (!location) return;
+                
+                const matches = 
+                    location.name?.toLowerCase().includes(query) ||
+                    location.id.toLowerCase().includes(query) ||
+                    location.region.toLowerCase().includes(query) ||
+                    location.description?.toLowerCase().includes(query);
+                
+                if (query === '' || matches) {
+                    node.style.opacity = '1';
+                    node.style.transform = node.style.transform.replace('scale(0.5)', '');
+                } else {
+                    node.style.opacity = '0.3';
+                    node.style.transform += ' scale(0.5)';
+                }
+            });
+            
+            if (event.key === 'Enter' && query) {
+                const firstMatch = gameData.locations.find(l => 
+                    l.name?.toLowerCase().includes(query) ||
+                    l.id.toLowerCase().includes(query)
+                );
+                if (firstMatch) {
+                    selectLocation(firstMatch);
+                }
+            }
+        }
+        
+        function toggleFilter(filterType) {
+            const button = event.target;
+            
+            if (filterType === 'all') {
+                activeFilters.clear();
+                activeFilters.add('all');
+                document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
+                button.classList.add('active');
+            } else {
+                activeFilters.delete('all');
+                
+                if (activeFilters.has(filterType)) {
+                    activeFilters.delete(filterType);
+                    button.classList.remove('active');
+                } else {
+                    activeFilters.add(filterType);
+                    button.classList.add('active');
+                }
+                
+                if (activeFilters.size === 0) {
+                    activeFilters.add('all');
+                    document.querySelector('.filter-button').classList.add('active');
+                }
+            }
+            
+            renderMap();
+            log(`Filter applied: ${Array.from(activeFilters).join(', ')}`, 'info');
+        }
+        
+        function autoLayout() {
+            log('Applying automatic layout algorithm...', 'info');
+            
+            // Force-directed layout simulation
+            const locations = gameData.locations;
+            const iterations = 100;
+            const repulsion = 10000;
+            const attraction = 0.1;
+            
+            for (let iter = 0; iter < iterations; iter++) {
+                const forces = {};
+                
+                // Initialize forces
+                locations.forEach(loc => {
+                    forces[loc.id] = { x: 0, y: 0 };
+                });
+                
+                // Repulsion between all nodes
+                locations.forEach(loc1 => {
+                    locations.forEach(loc2 => {
+                        if (loc1.id !== loc2.id) {
+                            const pos1 = locationPositions[loc1.id];
+                            const pos2 = locationPositions[loc2.id];
+                            
+                            const dx = pos1.x - pos2.x;
+                            const dy = pos1.y - pos2.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+                            
+                            const force = repulsion / (distance * distance);
+                            forces[loc1.id].x += (dx / distance) * force;
+                            forces[loc1.id].y += (dy / distance) * force;
+                        }
+                    });
+                });
+                
+                // Attraction between connected nodes
+                locations.forEach(loc => {
+                    if (loc.exits) {
+                        Object.values(loc.exits).forEach(targetId => {
+                            const pos1 = locationPositions[loc.id];
+                            const pos2 = locationPositions[targetId];
+                            
+                            if (pos1 && pos2) {
+                                const dx = pos2.x - pos1.x;
+                                const dy = pos2.y - pos1.y;
+                                const distance = Math.sqrt(dx * dx + dy * dy);
+                                
+                                const force = distance * attraction;
+                                forces[loc.id].x += (dx / distance) * force;
+                                forces[loc.id].y += (dy / distance) * force;
+                                forces[targetId].x -= (dx / distance) * force;
+                                forces[targetId].y -= (dy / distance) * force;
+                            }
+                        });
+                    }
+                });
+                
+                // Apply forces
+                locations.forEach(loc => {
+                    const dampening = 0.1;
+                    locationPositions[loc.id].x += forces[loc.id].x * dampening;
+                    locationPositions[loc.id].y += forces[loc.id].y * dampening;
+                });
+            }
+            
+            renderMap();
+            log('Auto-layout complete', 'success');
+        }
+        
+        // Zoom and pan controls
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom * 1.2, 5);
+            updateMapTransform();
+            updateMinimap();
+            log(`Zoomed in to ${Math.round(currentZoom * 100)}%`, 'info');
+        }
+        
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom / 1.2, 0.1);
+            updateMapTransform();
+            updateMinimap();
+            log(`Zoomed out to ${Math.round(currentZoom * 100)}%`, 'info');
+        }
+        
+        function resetView() {
+            currentZoom = 1;
+            currentPanX = 0;
+            currentPanY = 0;
+            updateMapTransform();
+            updateMinimap();
+            log('View reset to default', 'info');
+        }
+        
+        function updateMapTransform() {
+            const viewport = document.getElementById('mapViewport');
+            viewport.style.transform = `translate(${currentPanX}px, ${currentPanY}px) scale(${currentZoom})`;
+        }
+        
+        function updateMinimap() {
+            const minimap = document.getElementById('minimap');
+            const minimapViewport = document.getElementById('minimapViewport');
+            
+            if (!gameData || !gameData.locations) return;
+            
+            // Clear and redraw minimap
+            minimap.innerHTML = '';
+            minimap.appendChild(minimapViewport);
+            
+            const locations = gameData.locations;
+            const mapBounds = getMapBounds();
+            
+            locations.forEach(location => {
+                const pos = locationPositions[location.id];
+                if (!pos) return;
+                
+                const dot = document.createElement('div');
+                dot.style.position = 'absolute';
+                dot.style.width = '3px';
+                dot.style.height = '3px';
+                dot.style.background = location.isDiscovered ? '#2ecc71' : '#666';
+                dot.style.borderRadius = '50%';
+                
+                const x = ((pos.x - mapBounds.minX) / (mapBounds.maxX - mapBounds.minX)) * 150;
+                const y = ((pos.y - mapBounds.minY) / (mapBounds.maxY - mapBounds.minY)) * 100;
+                
+                dot.style.left = x + 'px';
+                dot.style.top = y + 'px';
+                
+                minimap.appendChild(dot);
+            });
+            
+            // Update viewport indicator
+            const container = document.getElementById('mapContainer');
+            const containerRect = container.getBoundingClientRect();
+            
+            const viewportWidth = (containerRect.width / currentZoom) / (mapBounds.maxX - mapBounds.minX) * 150;
+            const viewportHeight = (containerRect.height / currentZoom) / (mapBounds.maxY - mapBounds.minY) * 100;
+            
+            minimapViewport.style.width = Math.min(viewportWidth, 150) + 'px';
+            minimapViewport.style.height = Math.min(viewportHeight, 100) + 'px';
+            
+            const viewportX = (-currentPanX / currentZoom - mapBounds.minX) / (mapBounds.maxX - mapBounds.minX) * 150;
+            const viewportY = (-currentPanY / currentZoom - mapBounds.minY) / (mapBounds.maxY - mapBounds.minY) * 100;
+            
+            minimapViewport.style.left = Math.max(0, Math.min(viewportX, 150 - viewportWidth)) + 'px';
+            minimapViewport.style.top = Math.max(0, Math.min(viewportY, 100 - viewportHeight)) + 'px';
+        }
+        
+        function getMapBounds() {
+            let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+            
+            Object.values(locationPositions).forEach(pos => {
+                minX = Math.min(minX, pos.x);
+                maxX = Math.max(maxX, pos.x);
+                minY = Math.min(minY, pos.y);
+                maxY = Math.max(maxY, pos.y);
+            });
+            
+            return { minX, maxX, minY, maxY };
+        }
+        
+        // Map interaction events
+        function initMapInteraction() {
+            const mapContainer = document.getElementById('mapContainer');
+            
+            // Mouse events
+            mapContainer.addEventListener('mousedown', startDrag);
+            mapContainer.addEventListener('mousemove', drag);
+            mapContainer.addEventListener('mouseup', endDrag);
+            mapContainer.addEventListener('mouseleave', endDrag);
+            
+            // Wheel zoom
+            mapContainer.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newZoom = Math.max(0.1, Math.min(5, currentZoom * delta));
+                
+                // Zoom towards mouse position
+                const rect = mapContainer.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                const zoomFactor = newZoom / currentZoom;
+                currentPanX = mouseX - (mouseX - currentPanX) * zoomFactor;
+                currentPanY = mouseY - (mouseY - currentPanY) * zoomFactor;
+                currentZoom = newZoom;
+                
+                updateMapTransform();
+                updateMinimap();
+            });
+            
+            // Touch events for mobile
+            mapContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
+            mapContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
+            mapContainer.addEventListener('touchend', handleTouchEnd, { passive: false });
+        }
+        
+        function startDrag(e) {
+            isDragging = true;
+            dragStartX = e.clientX - currentPanX;
+            dragStartY = e.clientY - currentPanY;
+            document.getElementById('mapContainer').style.cursor = 'grabbing';
+        }
+        
+        function drag(e) {
+            if (!isDragging) return;
+            
+            currentPanX = e.clientX - dragStartX;
+            currentPanY = e.clientY - dragStartY;
+            
+            updateMapTransform();
+            
+            // Throttle minimap updates during drag
+            if (performance.now() - lastRenderTime > 50) {
+                updateMinimap();
+                lastRenderTime = performance.now();
+            }
+        }
+        
+        function endDrag() {
+            isDragging = false;
+            document.getElementById('mapContainer').style.cursor = 'grab';
+            updateMinimap();
+        }
+        
+        // Touch handling for mobile devices
+        let lastTouchDistance = 0;
+        
+        function handleTouchStart(e) {
+            e.preventDefault();
+            
+            if (e.touches.length === 1) {
+                startDrag({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
+            } else if (e.touches.length === 2) {
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                lastTouchDistance = Math.sqrt(
+                    Math.pow(touch2.clientX - touch1.clientX, 2) +
+                    Math.pow(touch2.clientY - touch1.clientY, 2)
+                );
+            }
+        }
+        
+        function handleTouchMove(e) {
+            e.preventDefault();
+            
+            if (e.touches.length === 1) {
+                drag({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
+            } else if (e.touches.length === 2) {
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const touchDistance = Math.sqrt(
+                    Math.pow(touch2.clientX - touch1.clientX, 2) +
+                    Math.pow(touch2.clientY - touch1.clientY, 2)
+                );
+                
+                if (lastTouchDistance > 0) {
+                    const scaleFactor = touchDistance / lastTouchDistance;
+                    currentZoom = Math.max(0.1, Math.min(5, currentZoom * scaleFactor));
+                    updateMapTransform();
+                }
+                
+                lastTouchDistance = touchDistance;
+            }
+        }
+        
+        function handleTouchEnd(e) {
+            e.preventDefault();
+            
+            if (e.touches.length === 0) {
+                endDrag();
+                lastTouchDistance = 0;
+            } else if (e.touches.length === 1) {
+                lastTouchDistance = 0;
+            }
+        }
+        
+        // Keyboard shortcuts
+        function initKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                
+                switch (e.key) {
+                    case '+':
+                    case '=':
+                        e.preventDefault();
+                        zoomIn();
+                        break;
+                    case '-':
+                        e.preventDefault();
+                        zoomOut();
+                        break;
+                    case '0':
+                        e.preventDefault();
+                        resetView();
+                        break;
+                    case 'f':
+                        e.preventDefault();
+                        document.getElementById('searchBox').focus();
+                        break;
+                    case 'Escape':
+                        document.getElementById('searchBox').value = '';
+                        searchLocations({ target: { value: '' } });
+                        break;
+                }
+            });
+        }
+        
+        // Performance monitoring
+        function startPerformanceMonitoring() {
+            setInterval(() => {
+                const memoryInfo = performance.memory;
+                if (memoryInfo) {
+                    const usedMB = Math.round(memoryInfo.usedJSHeapSize / 1024 / 1024);
+                    const totalMB = Math.round(memoryInfo.totalJSHeapSize / 1024 / 1024);
+                    
+                    if (usedMB > 100) { // Warn if using over 100MB
+                        log(`Memory usage: ${usedMB}/${totalMB}MB`, 'warning');
+                    }
+                }
+                
+                // Clear old log entries to prevent memory leaks
+                const logContainer = document.getElementById('conversionLog');
+                while (logContainer.children.length > 100) {
+                    logContainer.removeChild(logContainer.firstChild);
+                }
+            }, 30000); // Check every 30 seconds
+        }
+        
+        // Initialize everything
+        function init() {
+            log('🚀 Advanced Game Data Pipeline initialized', 'success');
+            log('💡 Tips: Use +/- to zoom, drag to pan, F to search, 0 to reset view', 'info');
+            
+            initMapInteraction();
+            initKeyboardShortcuts();
+            startPerformanceMonitoring();
+            
+            // Add CSS for selected nodes
+            const style = document.createElement('style');
+            style.textContent = `
+                .location-node.selected {
+                    border-color: #00d4ff !important;
+                    box-shadow: 0 0 20px #00d4ff !important;
+                    z-index: 200 !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Start the application
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{
+	"english": [
+		{
+			"id": "hpPotionPickUp",
+			"parts": [
+				{
+					"text": "Received HP Potion."
+				}
+			]
+		},
+		{
+			"id": "mpPotionPickUp",
+			"parts": [
+				{
+					"text": "Received MP Potion."
+				}
+			]
+		},
+		{
+			"id": "protoPoster",
+			"parts": [
+				{
+					"text": "A vandalised painting depicting the old king's reincarnation."
+				}
+			]
+		},
+		{
+			"id": "prototype_level_1_scene",
+			"parts": [
+				{
+					"text": "The box drains HP and MP."
+				}
+			]
+		},
+		{
+			"id": "dummy",
+			"parts": [
+				{
+					"text": "A practice dummy."
+				}
+			]
+		},
+		{
+			"id": "secondbox",
+			"parts": [
+				{
+					"text": "Dialogue testing."
+				},
+				{
+					"text": "Second dialogue."
+				}
+			]
+		},
+		{
+			"id": "prototypeRobot",
+			"parts": [
+				{
+					"text": "..."
+				},
+				{
+					"text": "Listen man, fuck you."
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b0d25exhnyu8t"]
+
+[ext_resource type="Shader" path="res://shaders/digitalraina.gdshader" id="1_8cj5j"]
+[ext_resource type="Texture2D" uid="uid://dx4pm0fp6qu27" path="res://shaders/glyph_atlas_inverted.png" id="2_2vq3c"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8cj5j")
+shader_parameter/alpha = 1.0
+shader_parameter/glow_color = Color(0, 1, 0, 1)
+shader_parameter/speed = 1.0
+shader_parameter/density = 5.0
+shader_parameter/brightness = 1.0
+shader_parameter/character_change_speed = 2.0
+shader_parameter/character_size = 0.335
+shader_parameter/character_padding = 0.1
+shader_parameter/character_map = ExtResource("2_2vq3c")

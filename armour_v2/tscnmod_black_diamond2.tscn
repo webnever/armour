@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4gp7c32kdnde"]
+
+[ext_resource type="PackedScene" uid="uid://bfrej53h2dmco" path="res://models/mod_black_diamond2.glb" id="1_j7tto"]
+
+[node name="mod_black_diamond2" instance=ExtResource("1_j7tto")]

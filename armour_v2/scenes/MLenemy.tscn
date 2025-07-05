@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://lyctb044uqel"]
+
+[ext_resource type="Script" path="res://scripts_c#/MLenemy.cs" id="1_dc472"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_863vy"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_w7gf6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n8d5u"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="MLenemy" type="CharacterBody3D"]
+script = ExtResource("1_dc472")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_863vy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_w7gf6")
+surface_material_override/0 = SubResource("StandardMaterial3D_n8d5u")
+
+[node name="WeaponHolder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
+
+[node name="DamageNumbersOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

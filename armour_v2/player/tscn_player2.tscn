@@ -1,0 +1,187 @@
+[gd_scene load_steps=11 format=4 uid="uid://ce75y8xbsk3iu"]
+
+[ext_resource type="PackedScene" uid="uid://cb3lcrxa7ush1" path="res://player/mod_player3.gltf" id="1_vqdqo"]
+[ext_resource type="Shader" path="res://shaders/pureColor.gdshader" id="2_p5imx"]
+[ext_resource type="Shader" path="res://shaders/digitalraina.gdshader" id="3_0f88h"]
+[ext_resource type="Texture2D" uid="uid://dx4pm0fp6qu27" path="res://shaders/glyph_atlas_inverted.png" id="4_mmn5l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0tjf"]
+resource_name = "material_0"
+transparency = 2
+alpha_scissor_threshold = 0.05
+alpha_antialiasing_mode = 0
+cull_mode = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_e10br"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 144,
+"index_data": PackedByteArray("AAACAAEAAQAAAAAAAQABAAAAAQACAAAAAwACAAAAAAADAAMAAAAAAAMAAAACAAMABAACAAMAAwAEAAQAAwADAAQAAwACAAQABQACAAQABAAFAAUABAAEAAUABAACAAUABgACAAUABQAGAAYABQAFAAYABQACAAYABwACAAYABgAHAAcABgAGAAcABgACAAcACAACAAcABwAIAAgABwAHAAgABwACAAgACQACAAgACAAJAAkACAAIAAkACAACAAkACgACAAkACQAKAAoACQAJAAoACQACAAoACwACAAoACgALAAsACgAKAAsACgACAAsADAACAAsACwAMAAwACwALAAwACwACAAwAAQACAAwADAABAAEADAAMAAEADAACAAEA"),
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("st0AALLdAABLogAA//8AAP9/AAD/fwAA//8AAEuiAAD//wAAs10AALLdAABMIgAAS6IAAAAAAACzXQAAAAAAAEwiAABMIgAAAAAAALNdAAAAAAAAS6IAAEwiAACy3QAAs10AAP//AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0cyf2"]
+resource_name = "blockbench_export_mesh"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("g4RBQsJyAAAAAEFCAABMImc7AABnOwAAAABMIgAAg4RBQsJyAAAAAIOEQULCcgAAAABBQgAAZztMIgAATCIAAAAAZzsAAIOEQULCcgAAAAD/f5hE/38AAAAATCIAAJhEAAAAAAAAAAAAAJhE/3+YRP9/AAAAAEwiAACDhEFCwnIAAAAATCJnOwAAAAAAAAAATCJnO4OEQULCcgAAAABBQgAAg4RBQsJyAAAAAGc7TCIAAAAAAAAAAGc7TCKDhEFCwnIAAAAAQUIAAP9/mET/f0wiAACYRAAAAAAAAAAAAACYRAAAmEQAAAAAAABMIv9/AAAAAMARQUKDhAAAZzsAAAAATCIAAEwiZzsAAEFCAAAAAMARQUKDhAAAAADAEUFCg4QAAEwiAAAAAGc7AABnO0wiAABBQgAAAADAEUFCg4QAAAAAAACYRP9/TCIAAAAAAACYRAAAmEQAAAAAAAAAAAAAmET/f0wiQUIAAAAAwBFBQoOEAAAAAEwiZztMImc7AAAAAAAAAADAEUFCg4QAAEFCAAAAAMARQUKDhAAAAABnO0wiZztMIgAAAAAAAAAAwBFBQoOEAACYRAAAAAAAAEwi/38AAAAAmEQAAJhEAAAAAAAAAAD/f5hE/39MIgAA"),
+"format": 34896613399,
+"index_count": 144,
+"index_data": PackedByteArray("AAACAAEAAwAFAAQAAwAGAAUABwAJAAgACgAMAAsADQAPAA4ADQAQAA8AEQATABIAFAAWABUAFwAZABgAFwAaABkAGwAdABwAHgAgAB8AIQAjACIAIQAkACMAJQAnACYAKAAqACkAKwAtACwAKwAuAC0ALwAxADAAMgA0ADMANQA2ADcANQA4ADYAOQA7ADoAPAA+AD0APwBBAEAAPwBCAEEAQwBFAEQARgBIAEcASQBLAEoASQBMAEsATQBPAE4AUABSAFEAUwBVAFQAUwBWAFUAVwBZAFgAWgBcAFsAXQBfAF4AXQBgAF8AYQBjAGIAZABmAGUAZwBpAGgAZwBqAGkAawBtAGwAbgBwAG8AcQByAHMAcQB0AHIAdQB3AHYA"),
+"material": SubResource("StandardMaterial3D_o0tjf"),
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 120,
+"vertex_data": PackedByteArray("st0AALLd/MVLogAA///8xf9/AAD/f/zFS6IAAP///7+y3QAAst3/v7LdAACy3f+/S6IAAP///79LogAA//+wwLLdAACy3bDA/38AAP9/sMD//wAAS6KwwLLdAACy3bDA/38AAP9/sMCy3QAAst3/v///AABLov+///8AAEui/7+y3QAAst3/v7LdAACy3fzF//8AAEui/MX/fwAA/3/8xf//AACzXf+///8AAEui/7//fwAA/3//v///AABLov+///8AALNd/7///wAAs13/v///AABLov+///8AAEui/7///wAAs13/v/9/AAD/f/+/st0AAEwi/MX//wAAs138xf9/AAD/f/zF//8AALNd/7+y3QAATCL/v7LdAABMIv+///8AALNd/7///wAAs12wwLLdAABMIrDA/38AAP9/sMBLogAAAACwwLLdAABMIrDA/38AAP9/sMCy3QAATCL/v0uiAAAAAP+/S6IAAAAA/7+y3QAATCL/v7LdAABMIvzFS6IAAAAA/MX/fwAA/3/8xbNdAAAAAP+/S6IAAAAA/7//fwAA/3//v0uiAAAAAP+/s10AAAAA/7+zXQAAAAD/v0uiAAAAAP+/S6IAAAAA/7+zXQAAAAD/v/9/AAD/f/+/TCIAAEwi/MWzXQAAAAD8xf9/AAD/f/zFs10AAAAA/79MIgAATCL/v0wiAABMIv+/s10AAAAA/7+zXQAAAACwwEwiAABMIrDA/38AAP9/sMAAAAAAs12wwEwiAABMIrDA/38AAP9/sMBMIgAATCL/vwAAAACzXf+/AAAAALNd/79MIgAATCL/v0wiAABMIvzFAAAAALNd/MX/fwAA/3/8xQAAAABLov+/AAAAALNd/7//fwAA/3//vwAAAACzXf+/AAAAAEui/78AAAAAS6L/vwAAAACzXf+/AAAAALNd/78AAAAAS6L/v/9/AAD/f/+/TCIAALLd/MUAAAAAS6L8xf9/AAD/f/zFAAAAAEui/79MIgAAst3/v0wiAACy3f+/AAAAAEui/78AAAAAS6KwwEwiAACy3bDA/38AAP9/sMCzXQAA//+wwEwiAACy3bDA/38AAP9/sMBMIgAAst3/v7NdAAD///+/s10AAP///79MIgAAst3/v0wiAACy3fzFs10AAP///MX/fwAA/3/8xUuiAAD///+/s10AAP///7//fwAA/3//v7NdAAD///+/S6IAAP///79LogAA////v7NdAAD///+/s10AAP///79LogAA////v/9/AAD/f/+//xz9uf8c/bn/HP25/38AAP9/AAD/fwAA/38AAKjyUWWo8lFlqPJRZVYNrZpWDa2aVg2tmv9/AAD/fwAA/38AAP9/AAD/4gFG/+IBRv/iAUYAAP9/AAD/fwAA/3//fwAA/38AAP9/AAD/fwAA////f////3////9//xz9uf8c/bn/HP25/38AAP9/AAD/fwAA/38AAKjyUWWo8lFlqPJRZVYNrZpWDa2aVg2tmv9/AAD/fwAA/38AAP9/AAD/4gFG/+IBRv/iAUYAAP9/AAD/fwAA/3//fwAA/38AAP9/AAD/fwAA////f////3////9//xz9uf8c/bn/HP25/38AAP9/AAD/fwAA/38AAKjyUWWo8lFlqPJRZVYNrZpWDa2aVg2tmv9/AAD/fwAA/38AAP9/AAD/4gFG/+IBRv/iAUYAAP9/AAD/fwAA/3//fwAA/38AAP9/AAD/fwAA////f////3////9//xz9uf8c/bn/HP25/38AAP9/AAD/fwAA/38AAKjyUWWo8lFlqPJRZVYNrZpWDa2aVg2tmv9/AAD/fwAA/38AAP9/AAD/4gFG/+IBRv/iAUYAAP9/AAD/fwAA/3//fwAA/38AAP9/AAD/fwAA////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_e10br")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7iygx"]
+render_priority = 0
+shader = ExtResource("2_p5imx")
+shader_parameter/myColor = Color(0, 0, 0, 0.329412)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ei4fe"]
+render_priority = 0
+shader = ExtResource("3_0f88h")
+shader_parameter/alpha = 1.0
+shader_parameter/glow_color = Color(0, 1, 0, 1)
+shader_parameter/speed = 1.0
+shader_parameter/density = 5.0
+shader_parameter/brightness = 1.0
+shader_parameter/character_change_speed = 2.0
+shader_parameter/character_size = 0.53
+shader_parameter/character_padding = 0.1
+shader_parameter/character_map = ExtResource("4_mmn5l")
+
+[sub_resource type="QuadMesh" id="QuadMesh_1bt60"]
+
+[node name="player" type="Node3D"]
+
+[node name="blockbench_export" parent="." instance=ExtResource("1_vqdqo")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="base" parent="blockbench_export/Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25348e-17, -0.03125, 0)
+
+[node name="waist2" parent="blockbench_export/Node/base" index="0"]
+transform = Transform3D(0.984808, 0.0375843, -0.169532, 1.86265e-09, 0.976296, 0.21644, 0.173648, -0.213151, 0.961464, 0, 2.57863, -0.0176411)
+
+[node name="chest2" parent="blockbench_export/Node/base/waist2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, -1.52208e-17, 0.140121, -0.0136089)
+
+[node name="head" parent="blockbench_export/Node/base/waist2/chest2" index="1"]
+transform = Transform3D(0.984808, -0.0151344, 0.172987, 0, 0.996195, 0.0871557, -0.173648, -0.0858317, 0.98106, 2.77556e-17, 1.125, -2.25514e-17)
+
+[node name="shoulder_left" parent="blockbench_export/Node/base/waist2/chest2" index="2"]
+transform = Transform3D(0.258537, -0.961525, -0.0928865, 0.624164, 0.0928864, 0.775752, -0.737277, -0.258537, 0.624164, -0.5, 0.484375, 0.0625)
+
+[node name="elbowleft" parent="blockbench_export/Node/base/waist2/chest2/shoulder_left" index="1"]
+transform = Transform3D(0.953717, 0, -0.300706, 0, 1, 0, 0.300706, 0, 0.953717, -0.484375, -0.03125, 0)
+
+[node name="hand_left" parent="blockbench_export/Node/base/waist2/chest2/shoulder_left/elbowleft" index="1"]
+transform = Transform3D(0.996547, 0.0818996, 0.0136728, -0.066243, 0.883466, -0.463789, -0.0500636, 0.461282, 0.88584, -0.65625, 0.09375, 0.078125)
+
+[node name="finger_1_left" parent="blockbench_export/Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left" index="1"]
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, -0.3125, -0.03125, -0.109375)
+
+[node name="index_1_left" parent="blockbench_export/Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left/finger_1_left" index="1"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.1875, 0, 0)
+
+[node name="thumb_left" parent="blockbench_export/Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left" index="2"]
+transform = Transform3D(0.793104, -0.607083, -0.0493612, 0.607736, 0.794136, -0.00220343, 0.0405372, -0.028251, 0.998779, -0.21875, -0.0625, -0.171875)
+
+[node name="thumb_indexleft" parent="blockbench_export/Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left/thumb_left" index="1"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.1875, 0, -0.015625)
+
+[node name="finger_2_left" parent="blockbench_export/Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left" index="3"]
+transform = Transform3D(0.906308, -0.422618, 0, 0.422618, 0.906308, 0, 0, 0, 1, -0.328125, -0.03125, -0.046875)
+
+[node name="index_2_left" parent="blockbench_export/Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left/finger_2_left" index="1"]
+transform = Transform3D(0.766044, -0.642788, 0, 0.642788, 0.766044, 0, 0, 0, 1, -0.1875, 0, 0)
+
+[node name="finger_3_left" parent="blockbench_export/Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left" index="4"]
+transform = Transform3D(0.917754, -0.392452, 0.0609072, 0.397126, 0.905129, -0.151763, 0.00443088, 0.163469, 0.986539, -0.3125, -0.03125, -0.015625)
+
+[node name="index_3_left" parent="blockbench_export/Node/base/waist2/chest2/shoulder_left/elbowleft/hand_left/finger_3_left" index="1"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.1875, 0, 0.03125)
+
+[node name="shoulder_right" parent="blockbench_export/Node/base/waist2/chest2" index="3"]
+transform = Transform3D(0.422326, 0.620419, 0.660849, -0.904989, 0.3299, 0.268629, -0.0513519, -0.71151, 0.700797, 0.5, 0.484375, -0.0625)
+
+[node name="elbowright" parent="blockbench_export/Node/base/waist2/chest2/shoulder_right" index="1"]
+transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, 0.484375, -0.03125, 0)
+
+[node name="hand_right" parent="blockbench_export/Node/base/waist2/chest2/shoulder_right/elbowright" index="1"]
+transform = Transform3D(0.91125, -0.367486, 0.18595, 0.385485, 0.919983, -0.0709436, -0.145, 0.136328, 0.979995, 0.6875, 0.15625, 0)
+
+[node name="finger_1_right" parent="blockbench_export/Node/base/waist2/chest2/shoulder_right/elbowright/hand_right" index="1"]
+transform = Transform3D(0.972581, 0.21644, 0.0850898, -0.215616, 0.976296, -0.018864, -0.0871557, 1.86265e-09, 0.996195, 0.3125, -0.03125, -0.109375)
+
+[node name="index_1_right" parent="blockbench_export/Node/base/waist2/chest2/shoulder_right/elbowright/hand_right/finger_1_right" index="1"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0.1875, 0, 0)
+
+[node name="thumb_right" parent="blockbench_export/Node/base/waist2/chest2/shoulder_right/elbowright/hand_right" index="2"]
+transform = Transform3D(0.741553, 0.607083, 0.285567, -0.578946, 0.794136, -0.184851, -0.339, -0.028251, 0.940362, 0.21875, -0.0625, -0.171875)
+
+[node name="thumb_indexright" parent="blockbench_export/Node/base/waist2/chest2/shoulder_right/elbowright/hand_right/thumb_right" index="1"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0.1875, 0, -0.015625)
+
+[node name="finger_2_right" parent="blockbench_export/Node/base/waist2/chest2/shoulder_right/elbowright/hand_right" index="3"]
+transform = Transform3D(0.905445, 0.422618, -0.0395326, -0.422216, 0.906308, 0.0184343, 0.0436194, 1.86265e-09, 0.999048, 0.328125, -0.03125, -0.046875)
+
+[node name="index_2_right" parent="blockbench_export/Node/base/waist2/chest2/shoulder_right/elbowright/hand_right/finger_2_right" index="1"]
+transform = Transform3D(0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 0, 0, 1, 0.1875, 0, 0)
+
+[node name="finger_3_right" parent="blockbench_export/Node/base/waist2/chest2/shoulder_right/elbowright/hand_right" index="4"]
+transform = Transform3D(0.908953, 0.392452, -0.140663, -0.408842, 0.905129, -0.116574, 0.0815685, 0.163469, 0.983171, 0.3125, -0.03125, -0.015625)
+
+[node name="index_3_right" parent="blockbench_export/Node/base/waist2/chest2/shoulder_right/elbowright/hand_right/finger_3_right" index="1"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.125, 0, 0.03125)
+
+[node name="rope2" parent="blockbench_export/Node/base/waist2" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, -1.52208e-17, 0.140121, -0.0136089)
+
+[node name="leg_left" parent="blockbench_export/Node/base" index="1"]
+transform = Transform3D(0.990498, 0.130485, -0.0434534, -0.130443, 0.991449, 0.00380168, 0.0435779, 0.00190265, 0.999048, -0.25, 2.25, 0.0625)
+
+[node name="knee_left" parent="blockbench_export/Node/base/leg_left" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, -0.078125, -0.734375, -0.024284)
+
+[node name="foot_left" parent="blockbench_export/Node/base/leg_left/knee_left" index="1"]
+transform = Transform3D(0.968329, -0.121123, 0.218331, 0.189343, 0.926247, -0.325908, -0.162754, 0.356926, 0.919845, -0.015625, -1, 0.0285175)
+
+[node name="leg_right" parent="blockbench_export/Node/base" index="2"]
+transform = Transform3D(0.992404, -0.115683, -0.0418558, 0.0868241, 0.899649, -0.427895, 0.0871558, 0.42101, 0.902859, 0.25, 2.25, 0)
+
+[node name="knee_right" parent="blockbench_export/Node/base/leg_right" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.92388, 0.382684, 0, -0.382684, 0.92388, 0.078125, -0.734375, -0.024284)
+
+[node name="foot_right" parent="blockbench_export/Node/base/leg_right/knee_right" index="1"]
+transform = Transform3D(0.96225, 0.109296, -0.249257, -0.084186, 0.990438, 0.109296, 0.258819, -0.084186, 0.96225, 0.015625, -1, 0.0285175)
+
+[node name="blockbench_export2" type="Node3D" parent="."]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0.01, 0)
+
+[node name="Node" type="Node3D" parent="blockbench_export2"]
+visible = false
+
+[node name="cylinder" type="MeshInstance3D" parent="blockbench_export2/Node"]
+mesh = SubResource("ArrayMesh_0cyf2")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_7iygx")
+
+[node name="face" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.20284, 0, -1.37561e-08, 0, 0.356235, 0, 1.77328e-08, 0, -0.157352, -1.78013e-08, 1.88986, -0.203623)
+material_override = SubResource("ShaderMaterial_ei4fe")
+mesh = SubResource("QuadMesh_1bt60")
+
+[editable path="blockbench_export"]

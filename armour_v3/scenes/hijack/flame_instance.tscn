@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcywjv0s0sphi"]
+
+[ext_resource type="Shader" uid="uid://w03d6cl5nx40" path="res://scenes/hijack/hijackFlame.gdshader" id="1_72lsp"]
+[ext_resource type="Texture2D" uid="uid://dddaufs2q6v37" path="res://scenes/hijack/flame.png" id="2_nwa3o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y8mf8"]
+render_priority = 0
+shader = ExtResource("1_72lsp")
+shader_parameter/spritesheet_texture = ExtResource("2_nwa3o")
+shader_parameter/frames_horizontal = 10
+shader_parameter/frames_vertical = 1
+shader_parameter/animation_speed = 10.0
+shader_parameter/auto_animate = true
+shader_parameter/manual_frame = 0
+shader_parameter/black_threshold = 0.015
+shader_parameter/border_clamp = 0.01
+
+[sub_resource type="QuadMesh" id="QuadMesh_nbde0"]
+
+[node name="flameInstance" type="MeshInstance3D"]
+material_override = SubResource("ShaderMaterial_y8mf8")
+mesh = SubResource("QuadMesh_nbde0")

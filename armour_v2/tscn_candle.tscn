@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://jmgemm3f8lh5"]
+
+[ext_resource type="PackedScene" uid="uid://bnvschpefot1s" path="res://models/mod_candle2.gltf" id="1_q0fme"]
+[ext_resource type="Script" path="res://scripts_c#/CandleLight.cs" id="2_75x0a"]
+
+[sub_resource type="Gradient" id="Gradient_ra4kk"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gppr4"]
+gradient = SubResource("Gradient_ra4kk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nfydy"]
+angle_max = 360.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 0.1
+initial_velocity_max = 0.3
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+color_initial_ramp = SubResource("GradientTexture1D_gppr4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gv2a"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.619608, 0.2, 0, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_pcyoo"]
+material = SubResource("StandardMaterial3D_4gv2a")
+size = Vector2(0.1, 0.1)
+
+[node name="blockbench_export" instance=ExtResource("1_q0fme")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397954, 0)
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_nfydy")
+draw_pass_1 = SubResource("QuadMesh_pcyoo")
+
+[node name="candleLight" type="OmniLight3D" parent="GPUParticles3D" index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.0650502, 0)
+light_color = Color(1, 0.611765, 0.254902, 1)
+light_energy = 0.1
+light_size = 0.15
+omni_range = 0.439522
+script = ExtResource("2_75x0a")

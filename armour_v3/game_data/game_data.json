@@ -1,0 +1,326 @@
+{
+	"type": "unified_game_data",
+	"version": "0.1",
+	"config": {
+		"gameTitle": "ÆTHER WEBNEVER: ARMOUR",
+		"version": "v2025.12.09",
+		"author": "WEBNEVER",
+		"startingLocationId": "armour",
+		"startingInventory": [
+			"sentinel",
+			"hand_railgun"
+		],
+		"timeScale": 60.0,
+		"playerStartStats": {
+			"health": 100,
+			"maxHealth": 100,
+			"satoshi": 5000,
+			"strength": 15,
+			"dexterity": 12,
+			"intelligence": 18
+		}
+	},
+	"locations": [
+		{
+			"id": "armour",
+			"name": "ÆETHER WEBNEVER: ARMOUR",
+			"description": "v2025.12.09\nBased on true events.\nType 'help' for commands.",
+			"exits": {
+				"begin": "desert_wander",
+				"valHell": "val_hell",
+				"pylon": "pylon",
+				"sphinx": "sphinx",
+				"forgiven": "forgiven",
+				"cards": "cards",
+				"vision_of_luh": "vision_of_luh",
+				"desert_wander": "desert_wander",
+				"desert_labyrinth": "desert_labyrinth",
+				"hijack_temple": "hijack_temple",
+				"hijack_temple_arm": "hijack_temple_arm",
+				"after_hijack": "hijack_temple_writhing"
+			},
+			"region": "title",
+			"isDiscovered": true,
+			"scenePath": "scenes/armour/armour.tscn"
+		},
+		{
+			"id": "val_hell",
+			"name": "VAL HELL",
+			"description": "DEMO",
+			"region": "title",
+			"isDiscovered": false,
+			"scenePath": "scenes/valHell/valHell.tscn"
+		},
+		{
+			"id": "pylon",
+			"name": "PYLON",
+			"description": "DEMO",
+			"region": "title",
+			"isDiscovered": false,
+			"scenePath": "scenes/pylon/pylon.tscn"
+		},
+		{
+			"id": "sphinx",
+			"name": "SPHINX",
+			"description": "DEMO",
+			"region": "title",
+			"isDiscovered": false,
+			"scenePath": "scenes/sphinx/sphinx.tscn"
+		},
+		{
+			"id": "forgiven",
+			"name": "FORGIVEN",
+			"description": "DEMO",
+			"region": "title",
+			"isDiscovered": false,
+			"scenePath": "scenes/forgiven/forgiven.tscn"
+		},
+		{
+			"id": "cards",
+			"name": "CARDS",
+			"description": "DEMO",
+			"region": "title",
+			"isDiscovered": false,
+			"scenePath": "scenes/cards/cards.tscn"
+		},
+		{
+			"id": "vision_of_luh",
+			"name": "VISION OF LUH",
+			"description": "DEMO",
+			"region": "title",
+			"isDiscovered": false,
+			"scenePath": "scenes/visionOfLuh/visionOfLuh.tscn"
+		},
+		{
+			"id": "mothership",
+			"name": "Mothership",
+			"description": "User MXI, you have been assigned mission 'DNSCRYPT'. An archive of 2nd Earth's internet is hidden on the planet. Extract it's data.",
+			"exits": {
+				"3rd_Earth": "landing_zone"
+			},
+			"region": "Mothership",
+			"isDiscovered": false,
+			"scenePath": "scenes/intelligence/intelligence.tscn"
+		},
+		{
+			"id": "landing_zone",
+			"name": "Third Earth Desert Landing Zone",
+			"description": "The harsh landscape of 3rd Earth limitlessly sprawls over your vision. The sky is a hue of purple and red. The coarse sand seems to shift with black glitches. You've got nothing but your bare naked atlantean skin. Your naval upbringing longs for the sea. The sun is eclipsed on the horizon, morning of a ring of fire scarcely illuminating your wandering path. You have complete faith in the mission. In the distance, a silver crucifix stands alone.",
+			"exits": {
+				"crucifix": "desert_crucifix"
+			},
+			"features": {
+				"sand": "You pick up some sand and roll it around your fingers. It feels like it has an electric buzz, and distorts with vantablack tracers.",
+				"landing": "A sandstone pavilion in a vast, irradiated desert. No sight of anything but sand and mountains on the horizon."
+			},
+			"region": "Third Earth Desert",
+			"isDiscovered": false
+		},
+		{
+			"id": "desert_crucifix",
+			"name": "The Crucifix",
+			"description": "The silver crucifix ominously grows in your sweltered vision, a holy sight. Pinned to the horizontal beam with stakes, a dead, black serpent, bleeding black and dripping from the mouth. You ponder this for a while. A spectral figure wanders, not far from you.",
+			"exits": {
+				"spectral_figure": "desert_spectral_figure"
+			},
+			"features": {
+				"crucifix": "It's old. Really old. You wish you could carbon date it **USE ITEM CARBON DATE**. The snake is dead as fuck."
+			},
+			"region": "Third Earth Desert",
+			"isDiscovered": false,
+			"imagePath": "snakeCrucifix.png",
+			"imageDisplayMode": "regular"
+		},
+		{
+			"id": "desert_spectral_figure",
+			"name": "The Holy Ghost",
+			"description": "The first sign of a lifeform on this lifeless planet. Nothing would describe the look of his face. You feel as if the gentlest, most powerful force has moved your soul. He smiles, and vanishes.",
+			"exits": {
+				"wander": "desert_wander"
+			},
+			"features": {
+				"spectral_figure": "He's gone man.",
+				"temple": "Way off in the distance. Embedded in some rocky mountains."
+			},
+			"region": "Third Earth Desert",
+			"isDiscovered": false
+		},
+		{
+			"id": "desert_wander",
+			"name": "Wandering the Desert",
+			"description": "Alone, you walk through the desert, tirelessly, relentlessly, endlessly. You've got a few things with you.",
+			"region": "Third Earth Desert",
+			"isDiscovered": false
+		},
+		{
+			"id": "desert_scan_region",
+			"name": "Scanning the Region",
+			"description": "SENTINEL's data streams into your mind. It's bleak, but eerily beautiful. It found a single landmark in the distance, but the data is all corrupted. Your only choice is to follow the radar proximity sensor.",
+			"exits": {
+				"desert_labyrinth": "desert_labyrinth"
+			},
+			"region": "Third Earth Desert",
+			"isDiscovered": false
+		},
+		{
+			"id": "desert_labyrinth",
+			"name": "The Labyrinth",
+			"description": "The air shimmers with distortions, and pathways seem to shift.",
+			"exits": {},
+			"region": "Desert Labyrinth",
+			"isDiscovered": false
+		},
+		{
+			"id": "hijack_temple",
+			"name": "The Temple",
+			"description": "You find what the SENTINEL was looking for, a brutalist temple, with a metal door that has a FACE ID logo graffitied to it. ['scan']",
+			"customCommands": {
+				"scan": "hijack_temple_faceid"
+			},
+			"region": "HIJACK Temple",
+			"isDiscovered": false
+		},
+		{
+			"id": "hijack_temple_faceid",
+			"name": "FACE ID",
+			"description": "You approach the door, lock in with your face, and it opens, sand and dust blowing in.",
+			"exits": {
+				"inside": "hijack_temple_inside"
+			},
+			"region": "HIJACK Temple",
+			"isDiscovered": false
+		},
+		{
+			"id": "hijack_temple_inside",
+			"name": "Inside",
+			"description": "It appears to be a store, decorated with glass cases and shelves. In the middle of the room is a marble column, inside a casing upon it, a shining red prosthetic arm.",
+			"exits": {
+				"towards_arm": "hijack_temple_arm"
+			},
+			"region": "HIJACK Temple",
+			"isDiscovered": false
+		},
+		{
+			"id": "hijack_temple_arm",
+			"region": "HIJACK Temple",
+			"isDiscovered": false
+		},
+		{
+			"id": "hijack_temple_writhing",
+			"name": "HIJACK.",
+			"description": "You lay on the floor, writhing in pain, as the arm's screen lights up. It prints a message.\n[color=ff0000]HI JACK! YOU'VE BEEN TRAUMATISED.[/color]\n\n['recover']",
+			"customCommands": {
+				"recover": "6_dragons_exfiltration_1"
+			},
+			"region": "HIJACK Temple",
+			"isDiscovered": false,
+			"scenePath": "scenes/hijack/hijack.tscn"
+		},
+		{
+			"id": "6_dragons_exfiltration_1",
+			"name": "D-RPA DOGS",
+			"description": "You crawl out of the temple, this new arm clanging on the hard floor. It's night now, and outside there temple is an array of strange robots. Printed on the side, it reads, 'D-RPA DOG'.\n\n['stand']",
+			"customCommands": {
+				"stand": "6_dragons_exfiltration_2"
+			},
+			"region": "HIJACK Temple",
+			"isDiscovered": false
+		},
+		{
+			"id": "6_dragons_exfiltration_2",
+			"name": "The WIRESHARK.",
+			"description": "You stand, and see about 5 robot dogs surrounding you, theyre moving in synchronised patterns. Your arm seems to buzz, and you feel all the neural connections surge. Nested inside the arm, and completely conscious to you, you feel a blade, not made of metal, but of some black aetheric substance with dripping, shining, code.",
+			"enemyIds": [
+				"drpa_dog"
+			],
+			"region": "HIJACK Temple",
+			"isDiscovered": false
+		},
+		{
+			"id": "6_dragons_exfiltration_attack",
+			"name": "Exfiltration",
+			"description": "With just a tap of intention, the blade extends from your arm. You rush a dog, slicing it in half.\n[color=ffff00]'That's enough'[/color]. A helicopter appears above you, out of active camouflage.",
+			"region": "HIJACK Temple",
+			"isDiscovered": false
+		}
+	],
+	"items": [
+		{
+			"id": "sentinel",
+			"name": "SENTINEL",
+			"description": "A cybernetic dove. It can be used to scout areas and relay information back to you.",
+			"canDrop": false,
+			"category": "Tool",
+			"itemType": "Tool",
+			"defaultTransition": {
+				"targetLocationId": "desert_scan_region",
+				"transitionMessage": "You send off the SENTINEL to scan the region. ['look' to get the results]",
+				"consumeItem": false,
+				"requiredLocationIds": [
+					"desert_wander",
+					"desert_wander_continue"
+				]
+			}
+		},
+		{
+			"id": "hand_railgun",
+			"name": "Hand Railgun",
+			"description": "A railgun, spins gravity around a bullet.",
+			"canTake": true,
+			"canDrop": true,
+			"category": "Weapon",
+			"itemType": "Weapon",
+			"useValue": 25,
+			"isStackable": false,
+			"stackCount": 1
+		},
+		{
+			"id": "hijack",
+			"name": "HIJACK",
+			"description": "Your chrome red cybernetic arm. It has a blade built in. You still remember the burn.",
+			"canTake": false,
+			"canDrop": false,
+			"category": "Weapon",
+			"itemType": "Weapon",
+			"useValue": 100,
+			"isStackable": false,
+			"stackCount": 1
+		}
+	],
+	"characters": [],
+	"enemies": [
+		{
+			"id": "black_rat",
+			"name": "Black Rat",
+			"description": "A corrupted rodent with glitching fur and red digital eyes. It moves erratically, leaving pixelated trails.",
+			"health": 15,
+			"maxHealth": 15,
+			"attackPower": 5,
+			"defense": 2,
+			"experienceReward": 10,
+			"goldReward": 0,
+			"lootTable": []
+		},
+		{
+			"id": "drpa_dog",
+			"name": "D-RPA DOG",
+			"description": "A military-grade robotic dog with synchronized movement patterns. Its metallic frame gleams with tactical sensors and weapon systems.",
+			"health": 45,
+			"maxHealth": 45,
+			"attackPower": 18,
+			"defense": 8,
+			"experienceReward": 35,
+			"satoshiReward": 50,
+			"canFlee": false,
+			"isAggressive": true,
+			"deathMessage": "The D-RPA DOG sparks and collapses, its systems shutting down with a mechanical whine.",
+			"lootTable": [],
+			"tags": [
+				"robot",
+				"military",
+				"synchronized"
+			]
+		}
+	],
+	"quests": []
+}

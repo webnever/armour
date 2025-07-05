@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1e3gg2rb8gec"]
+
+[ext_resource type="Script" uid="uid://177wcj7p0wvo" path="res://scripts/AdvancedCLIEmulator.cs" id="1_j2ip0"]
+[ext_resource type="Shader" uid="uid://7c33v4pcw6sk" path="res://shaders/VHS.gdshader" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://cs503kvj1r64s" path="res://scripts/DirectScrollController.cs" id="5_p5qdi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ya87q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
+shader = ExtResource("3_sugp2")
+shader_parameter/wiggle = 0.02
+shader_parameter/wiggle_speed = 20.0
+shader_parameter/smear = 0.375
+shader_parameter/blur_samples = 15
+
+[node name="CLIEmulator" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_j2ip0")
+_defaultTextColor = Color(1, 1, 1, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(800, 432)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ya87q")
+horizontal_scroll_mode = 0
+script = ExtResource("5_p5qdi")
+_debugMode = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="scene" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="VHS" type="ColorRect" parent="CanvasLayer"]
+z_index = 4096
+material = SubResource("ShaderMaterial_jyhfs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

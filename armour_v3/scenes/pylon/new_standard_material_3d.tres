@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://liu3vu6sl6v"]
+
+[ext_resource type="Shader" uid="uid://w7le2gf8hurb" path="res://scenes/pylon/meshAndNormals.gdshader" id="1_xxpdj"]
+[ext_resource type="NoiseTexture3D" uid="uid://ds84u7mx5w3mt" path="res://scenes/pylon/new_noise_texture_3d.tres" id="2_4w8n5"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xxpdj")
+shader_parameter/noise_texture = ExtResource("2_4w8n5")
+shader_parameter/noise_scale = 2.0
+shader_parameter/displacement_strength = 0.1
+shader_parameter/buzz_frequency = 8.0
+shader_parameter/buzz_amplitude = 0.02

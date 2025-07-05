@@ -1,0 +1,303 @@
+[gd_scene load_steps=29 format=3 uid="uid://dyfjqqw3kilih"]
+
+[ext_resource type="Script" uid="uid://diyjucmio2oig" path="res://scenes/sphinx/CameraZoomLoop.cs" id="2_5uqd7"]
+[ext_resource type="PackedScene" uid="uid://cltivh32okpnx" path="res://scenes/sphinx/sphinx_gate.tscn" id="3_78yoh"]
+[ext_resource type="Script" uid="uid://ytxe44loe00g" path="res://scenes/sphinx/NebulaAnimator.cs" id="3_le2li"]
+[ext_resource type="Shader" uid="uid://rntliedxlitx" path="res://scenes/sphinx/hueShift.gdshader" id="3_wvsm8"]
+[ext_resource type="PackedScene" uid="uid://od6axt02fraw" path="res://scenes/sphinx/guns.tscn" id="4_bjqsb"]
+[ext_resource type="Texture2D" uid="uid://c02pjigj45atp" path="res://scenes/sphinx/pci.png" id="5_6do3o"]
+[ext_resource type="Texture2D" uid="uid://c58j3qb0fsvr6" path="res://scenes/sphinx/6d.png" id="5_ogqpt"]
+[ext_resource type="PackedScene" uid="uid://d00e4j3cynuyn" path="res://scenes/sphinx/wings.tscn" id="5_wvsm8"]
+[ext_resource type="Shader" uid="uid://c420h61jkigra" path="res://scenes/sphinx/star.gdshader" id="6_78yoh"]
+[ext_resource type="Shader" uid="uid://dqhg4bwnx3v2d" path="res://scenes/sphinx/godRays.gdshader" id="8_wvsm8"]
+[ext_resource type="PackedScene" uid="uid://pvmxc5bn4vcj" path="res://scenes/sphinx/pillar.glb" id="9_i6il6"]
+[ext_resource type="Shader" uid="uid://baywqysnquhpu" path="res://scenes/sphinx/deepspace.gdshader" id="9_v0fq5"]
+[ext_resource type="Material" uid="uid://dcxj3xi4wm0dd" path="res://scenes/sphinx/gun.tres" id="10_slwyf"]
+[ext_resource type="Shader" uid="uid://73h2ejf4t6wk" path="res://scenes/sphinx/border.gdshader" id="11_slwyf"]
+[ext_resource type="Texture2D" uid="uid://ccrd2vtrp61p0" path="res://scenes/sphinx/borderUpscale.png" id="12_slwyf"]
+[ext_resource type="Shader" uid="uid://bgdo251ylujdn" path="res://scenes/sphinx/nebula.gdshader" id="13_22c12"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_22c12"]
+shader = ExtResource("9_v0fq5")
+shader_parameter/zoom = 2.5
+shader_parameter/rotate_speed = 0.1
+shader_parameter/disp = Vector2(0.5, 0.9)
+shader_parameter/transparent = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbgjm"]
+render_priority = 0
+shader = ExtResource("13_22c12")
+shader_parameter/albedo = Color(1, 0.5, 0.3, 1)
+shader_parameter/star_color = Color(1, 0.8, 0.6, 1)
+shader_parameter/nudge = 0.739513
+shader_parameter/noise_iterations = 8
+shader_parameter/frequency_multiplier = 1.73373
+shader_parameter/nebula_scale = 0.5
+shader_parameter/base_height = 4.5
+shader_parameter/large_scale_multiplier = 0.5123
+shader_parameter/large_scale_offset = 100.0
+shader_parameter/large_scale_intensity = 4.0
+shader_parameter/nebula_intensity = 0.5
+shader_parameter/nebula_base = 0.03
+shader_parameter/max_steps = 30
+shader_parameter/min_distance = 0.0
+shader_parameter/max_distance = 100.0
+shader_parameter/step_size = 0.1
+shader_parameter/min_step = 0.02
+shader_parameter/density_accumulation = 0.014286
+shader_parameter/density_threshold = 0.9
+shader_parameter/min_density = 0.08
+shader_parameter/final_min_density = 0.04
+shader_parameter/break_distance = 0.1
+shader_parameter/max_ray_length = 10.0
+shader_parameter/alpha_threshold = 0.99
+shader_parameter/star_intensity = 1.0
+shader_parameter/star_falloff = 30.0
+shader_parameter/min_star_distance = 0.001
+shader_parameter/brightness_multiplier = 1.0
+
+[sub_resource type="Environment" id="Environment_3cnao"]
+
+[sub_resource type="World3D" id="World3D_v0fq5"]
+environment = SubResource("Environment_3cnao")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bjqsb"]
+render_priority = 0
+shader = ExtResource("6_78yoh")
+shader_parameter/star_brightness = 2.0
+shader_parameter/beam_intensity = 1.5
+shader_parameter/beam_width = 0.05
+shader_parameter/star_size = 0.3
+shader_parameter/glow_falloff = 3.0
+shader_parameter/beam_length = 1.0
+shader_parameter/star_color = Color(1, 0.9, 0.6, 1)
+shader_parameter/beam_color = Color(0.8, 0.9, 1, 1)
+shader_parameter/pulse_speed = 1.0
+shader_parameter/pulse_strength = 0.3
+shader_parameter/rotation_speed = 0.5
+shader_parameter/shimmer_speed = 4.0
+shader_parameter/shimmer_strength = 0.4
+shader_parameter/flicker_speed = 8.0
+shader_parameter/flicker_strength = 0.2
+
+[sub_resource type="QuadMesh" id="QuadMesh_wvsm8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbgjm"]
+transparency = 1
+albedo_texture = ExtResource("5_ogqpt")
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_le2li"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ogqpt"]
+transparency = 1
+albedo_texture = ExtResource("5_6do3o")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3cnao"]
+shader = ExtResource("3_wvsm8")
+shader_parameter/hue_shift_speed = 0.0
+shader_parameter/hue_shift_amount = 0.0
+shader_parameter/saturation_boost = 1.0
+shader_parameter/brightness_boost = 1.0
+shader_parameter/cycle_continuously = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0fq5"]
+shader = ExtResource("8_wvsm8")
+shader_parameter/angle = 0.5
+shader_parameter/position = 0.324
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 8.0
+shader_parameter/ray2_density = 30.0
+shader_parameter/hdr = false
+shader_parameter/seed = 5.0
+shader_parameter/seed_speed = 1.0
+shader_parameter/spread = 0.0
+shader_parameter/cutoff = -0.8
+shader_parameter/falloff = 1.0
+shader_parameter/edge_fade = 0.79
+shader_parameter/ray2_intensity = 0.3
+shader_parameter/godray_color = Vector4(1, 1, 1, 0.25)
+shader_parameter/brightness = 1.0
+shader_parameter/contrast = 1.0
+shader_parameter/blend_mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_le2li"]
+shader = ExtResource("11_slwyf")
+shader_parameter/brightness_boost = 2.517
+shader_parameter/contrast_boost = 3.0
+shader_parameter/alpha_threshold = 0.0
+shader_parameter/enable_black_to_alpha = true
+shader_parameter/glow_strength = 1.0
+shader_parameter/glow_radius = 0.01
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/enable_glow = true
+
+[node name="Sphinx" type="Node3D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_22c12")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="Control"]
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer2"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Camera3D2" type="Camera3D" parent="Control/SubViewportContainer2/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.956305, -0.292372, 0, 0.292372, 0.956305, 0, 0, 15.28)
+fov = 40.0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Control/SubViewportContainer2/SubViewport/Camera3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.965877, 0.258987, 0, -0.258987, 0.965877, -10, 4.55578, -25.1683)
+visible = false
+material_override = SubResource("ShaderMaterial_wbgjm")
+height = 7.08008
+
+[node name="Node3D" type="Node3D" parent="Control/SubViewportContainer2/SubViewport/Camera3D2/CSGCylinder3D"]
+visible = false
+script = ExtResource("3_le2li")
+animationSpeed = 0.15
+enableColorShift = false
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Control/SubViewportContainer2/SubViewport/Camera3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.965877, 0.258987, 0, -0.258987, 0.965877, 10, 4.55537, -25.1687)
+visible = false
+material_override = SubResource("ShaderMaterial_wbgjm")
+height = 7.08008
+
+[node name="Node3D2" type="Node3D" parent="Control/SubViewportContainer2/SubViewport/Camera3D2/CSGCylinder3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.72529e-09, 0, 3.72529e-09, 1, -20, 0.000293732, 0.000499249)
+visible = false
+script = ExtResource("3_le2li")
+animationSpeed = 0.15
+enableColorShift = false
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+world_3d = SubResource("World3D_v0fq5")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="world" type="Node3D" parent="Control/SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer/SubViewport/world"]
+transform = Transform3D(1, 0, 0, 0, 0.956356, -0.292205, 0, 0.292205, 0.956356, 0, 0, 15.2797)
+fov = 40.0
+script = ExtResource("2_5uqd7")
+NumberOfInstances = 15
+SphinxGateScene = ExtResource("3_78yoh")
+CrossedGunsScene = ExtResource("4_bjqsb")
+AngelWingsScene = ExtResource("5_wvsm8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Control/SubViewportContainer/SubViewport/world/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.309366, 0.950943, 0, -0.950943, 0.309366, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport/world/Camera3D"]
+transform = Transform3D(1.95466, 0, 0, 0, 1.95466, 0, 0, 0, 1.95466, 0, 1.80796, -9.59686)
+material_override = SubResource("ShaderMaterial_bjqsb")
+mesh = SubResource("QuadMesh_wvsm8")
+
+[node name="pillar" parent="Control/SubViewportContainer/SubViewport/world/Camera3D" instance=ExtResource("9_i6il6")]
+transform = Transform3D(2, 0, 0, 0, 1.91261, 0.584743, 0, -0.584743, 1.91261, -10, -6.91085, -21.6624)
+
+[node name="Icosphere" parent="Control/SubViewportContainer/SubViewport/world/Camera3D/pillar" index="0"]
+material_override = ExtResource("10_slwyf")
+
+[node name="Pillar_low_Material_0" parent="Control/SubViewportContainer/SubViewport/world/Camera3D/pillar" index="1"]
+material_override = ExtResource("10_slwyf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport/world/Camera3D/pillar"]
+transform = Transform3D(1.43414, 0, 0, 0, 1.37141, -0.419542, 0, 0.419542, 1.37141, -0.118807, 5.10517, -0.183844)
+material_override = SubResource("StandardMaterial3D_wbgjm")
+mesh = SubResource("QuadMesh_le2li")
+skeleton = NodePath("../../../../../../SubViewportContainer2/SubViewport/Camera3D2")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Control/SubViewportContainer/SubViewport/world/Camera3D/pillar/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+light_energy = 2.0
+
+[node name="pillar2" parent="Control/SubViewportContainer/SubViewport/world/Camera3D" instance=ExtResource("9_i6il6")]
+transform = Transform3D(2, 0, 0, 0, 1.91261, 0.584743, 0, -0.584743, 1.91261, 10, -6.91085, -21.6624)
+
+[node name="Icosphere" parent="Control/SubViewportContainer/SubViewport/world/Camera3D/pillar2" index="0"]
+material_override = ExtResource("10_slwyf")
+
+[node name="Pillar_low_Material_0" parent="Control/SubViewportContainer/SubViewport/world/Camera3D/pillar2" index="1"]
+material_override = ExtResource("10_slwyf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport/world/Camera3D/pillar2"]
+transform = Transform3D(1.16453, 0, 0, 0, 1.11359, -0.34067, 0, 0.34067, 1.11359, 0.151149, 5.08547, -0.189871)
+material_override = SubResource("StandardMaterial3D_ogqpt")
+mesh = SubResource("QuadMesh_le2li")
+skeleton = NodePath("../../../../../../SubViewportContainer2/SubViewport/Camera3D2")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Control/SubViewportContainer/SubViewport/world/Camera3D/pillar2/MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+light_energy = 2.0
+
+[node name="ColorRect3" type="ColorRect" parent="Control"]
+visible = false
+material = SubResource("ShaderMaterial_3cnao")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_v0fq5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+visible = false
+material = SubResource("ShaderMaterial_le2li")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -325.0
+offset_top = -183.0
+offset_right = 326.0
+offset_bottom = 183.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_slwyf")
+expand_mode = 2
+
+[editable path="Control/SubViewportContainer/SubViewport/world/Camera3D/pillar"]
+[editable path="Control/SubViewportContainer/SubViewport/world/Camera3D/pillar2"]

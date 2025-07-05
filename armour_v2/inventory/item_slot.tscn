@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvee5lj1g306h"]
+
+[ext_resource type="Texture2D" uid="uid://basd1u1eiqp8x" path="res://ui/potion-ball.png" id="1_anet3"]
+[ext_resource type="FontFile" uid="uid://cbggblycitxkq" path="res://fonts/MSMINCHO.TTF" id="2_slnws"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ebup7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2v1r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g0fxw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yoqiw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0t4d5"]
+
+[node name="itemSlot" type="HBoxContainer"]
+use_parent_material = true
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ebup7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d2v1r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_g0fxw")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yoqiw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0t4d5")
+button_mask = 0
+
+[node name="texture" type="TextureRect" parent="."]
+texture_filter = 1
+use_parent_material = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("1_anet3")
+expand_mode = 2
+
+[node name="space" type="Control" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="item" type="Label" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_slnws")
+theme_override_font_sizes/font_size = 48
+text = "Potion"
+vertical_alignment = 1
+
+[node name="space2" type="Control" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="quantity" type="Label" parent="."]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_slnws")
+theme_override_font_sizes/font_size = 48
+text = ": 99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="space3" type="Control" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="description" type="Label" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_slnws")
+theme_override_font_sizes/font_size = 48
+text = "Restores 100HP"
+vertical_alignment = 1
